@@ -1,0 +1,24 @@
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(../assests/images/vegetables.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  .wrapper {
+    width: 70%;
+    height: 0%;
+    transition: height 0.2s ease-in;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+  }
+  .show__wrapper {
+    height: 70%;
+  }
+  .hide__wrapper {
+    height: 0%;
+  }
+}

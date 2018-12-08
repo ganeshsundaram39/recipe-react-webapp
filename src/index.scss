@@ -1,5 +1,6 @@
 @import './assests/scss/variables';
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+
 body {
   margin: 0;
   padding: 0;
@@ -7,7 +8,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   color: $primary-text;
-  font: 400 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
   box-sizing: border-box;
   background: $primary-background;
 }

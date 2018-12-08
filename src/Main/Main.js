@@ -1,14 +1,15 @@
 import React from 'react';
 
+import { Intro } from '../Intro/Intro';
 export class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showIntro: false };
+    this.state = { showIntro: true };
   }
   render() {
     let display = null;
     if (this.state.showIntro) {
-      display = <div className="intro">Intro</div>;
+      display = <Intro />;
     } else {
       display = (
         <div className="container">
