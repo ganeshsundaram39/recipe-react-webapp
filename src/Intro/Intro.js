@@ -1,21 +1,21 @@
 import React from 'react';
 
 import classes from './Intro.module.scss';
+import { Ui } from '../Ui-Components/Ui-Components';
 export class Intro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showWrapper: false
     };
-    this.wrapperClasses = [classes.wrapper];
   }
 
   componentDidMount() {
-    setTimeout(() => this.showWrapper(), 500);
+    setTimeout(() => {
+      this.showWrapper();
+    }, 7000);
   }
-  //   componentWillUnmount() {
-  //     this.wrapperClasses.push(classes.hide__wrapper);
-  //   }
+
   showWrapper() {
     this.setState({
       showWrapper: true
@@ -23,12 +23,22 @@ export class Intro extends React.Component {
   }
 
   render() {
-    if (this.state.showWrapper) {
-      this.wrapperClasses.push(classes.show__wrapper);
-    }
+    const wrapperStyles = { height: this.state.showWrapper ? '50%' : '0%' };
     return (
       <div className={classes.intro}>
-        <div className={this.wrapperClasses.join(' ')} />
+        <img
+          className={classes.background}
+          src={require('../assests/images/vegetables.jpg')}
+          alt="vegetables"
+        />
+        <Ui.Overlay />
+        <div className={classes.wrapper} style={wrapperStyles}>
+          <div className={classes.next__action}>
+            <Ui.Button button__Type="dark__button">New Recipe</Ui.Button>
+            <Ui.Button button__Type="light__button">Sign Up</Ui.Button>
+          </div>
+        </div>
+        {this.state.showWrapper ? null : <Ui.LoadingScreen />}
       </div>
     );
   }
