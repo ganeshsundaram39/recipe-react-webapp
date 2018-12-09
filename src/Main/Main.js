@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Intro } from '../Intro/Intro';
+import { Intro } from '../Components/Intro/Intro';
 export class Main extends React.Component {
   constructor(props) {
     super(props);

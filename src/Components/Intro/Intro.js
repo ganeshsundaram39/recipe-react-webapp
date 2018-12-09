@@ -28,7 +28,7 @@ export class Intro extends React.Component {
       <div className={classes.intro}>
         <img
           className={classes.background}
-          src={require('../assests/images/vegetables.jpg')}
+          src={require('../../assests/images/vegetables.jpg')}
           alt="vegetables"
         />
         <Ui.Overlay />
