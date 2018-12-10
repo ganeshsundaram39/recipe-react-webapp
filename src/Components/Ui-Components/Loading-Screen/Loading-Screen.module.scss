@@ -1,7 +1,7 @@
 .loading__screen {
   position: absolute;
   z-index: 9999;
-  width: 100%;
+  width: 200%;
   height: 100%;
   background: #fff;
   display: flex;
@@ -24,7 +24,7 @@
       font-size: 1.2rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-left: 2%;
+      margin-left: 1%;
     }
     img {
       animation-name: jump;
