@@ -1,22 +1,28 @@
 import React from 'react';
 
 import { Intro } from '../Components/Intro/Intro';
+import { NewRecipe } from '../Components/New-Recipe/New-Recipe';
 export class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showIntro: true };
+    this.state = { activeWindow: 'Intro' };
+    this.changeActiveWindow = this.changeActiveWindow.bind(this);
+  }
+  changeActiveWindow(name = 'Intro') {
+    this.setState({ activeWindow: name });
   }
   render() {
     let display = null;
-    if (this.state.showIntro) {
-      display = <Intro />;
-    } else {
-      display = (
-        <div className="container">
-          <div>Header</div>
-          <div>body</div>
-        </div>
-      );
+    switch (this.state.activeWindow) {
+      case 'Intro':
+        display = <Intro navigateTo={this.changeActiveWindow} />;
+        break;
+      case 'New-Recipe':
+        display = <NewRecipe navigateTo={this.changeActiveWindow} />;
+        break;
+      default:
+        display = null;
+        break;
     }
     return <>{display}</>;
   }
