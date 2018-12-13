@@ -10,14 +10,19 @@ export class Intro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showWrapper: false
+      showWrapper: false,
+      backgroundImage: {
+        name: 'vegetables',
+        url: 'vegetables.jpg',
+        cssStyles: {}
+      }
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.showWrapper();
-    }, 7000);
+    }, 1000); //7000
   }
 
   showWrapper() {
@@ -34,10 +39,10 @@ export class Intro extends React.Component {
     const wrapperStyles = { height: this.state.showWrapper ? '50%' : '0%' };
     return (
       <div className={classes.intro}>
-        <img
-          className={classes.background}
-          src={require('../../assests/images/vegetables.jpg')}
-          alt="vegetables"
+        <Ui.BackgroundImage
+          url={this.state.backgroundImage.url}
+          name={this.state.backgroundImage.name}
+          cssStyles={this.state.backgroundImage.cssStyles}
         />
         <Ui.Overlay />
         <div className={classes.wrapper} style={wrapperStyles}>
