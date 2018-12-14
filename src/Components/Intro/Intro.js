@@ -36,7 +36,10 @@ export class Intro extends React.Component {
   }
 
   render() {
-    const wrapperStyles = { height: this.state.showWrapper ? '50%' : '0%' };
+    const wrapperStyles = {
+      height: this.state.showWrapper ? '50%' : '0%',
+      width: '50%'
+    };
     return (
       <div className={classes.intro}>
         <Ui.BackgroundImage
@@ -45,7 +48,7 @@ export class Intro extends React.Component {
           cssStyles={this.state.backgroundImage.cssStyles}
         />
         <Ui.Overlay />
-        <div className={classes.wrapper} style={wrapperStyles}>
+        <Ui.Wrapper dimensions={wrapperStyles}>
           <div className={classes.next__action}>
             <Ui.Button
               button__Type="dark__button"
@@ -60,7 +63,7 @@ export class Intro extends React.Component {
               Sign Up
             </Ui.Button>
           </div>
-        </div>
+        </Ui.Wrapper>
         {this.state.showWrapper ? null : <Ui.LoadingScreen />}
       </div>
     );

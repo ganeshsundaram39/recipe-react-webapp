@@ -2,9 +2,12 @@ import { Button } from './Button/Button';
 import { Overlay } from './Overlay/Overlay';
 import { LoadingScreen } from './Loading-Screen/Loading-Screen';
 import { BackgroundImage } from './Background-Image/BackgroundImage';
+import { Wrapper } from './Wrapper/Wrapper';
+
 export const Ui = {
   Button,
   Overlay,
   LoadingScreen,
-  BackgroundImage
+  BackgroundImage,
+  Wrapper
 };

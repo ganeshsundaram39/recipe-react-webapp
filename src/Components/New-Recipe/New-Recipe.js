@@ -9,6 +9,7 @@ export class NewRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showWrapper: false,
       backgroundImage: {
         name: 'fruits',
         url: 'fruits.jpeg',
@@ -19,7 +20,23 @@ export class NewRecipe extends Component {
   changeActiveWindow(windowName = 'Intro') {
     this.props.navigateTo(windowName);
   }
+  componentDidMount() {
+    setTimeout(() => {
+      this.showWrapper();
+    }, 500); //7000
+  }
+
+  showWrapper() {
+    this.setState({
+      showWrapper: true
+    });
+  }
   render() {
+    const wrapperDimensions = {
+      height: this.state.showWrapper ? '80%' : '0%',
+      width: '80%'
+    };
+
     return (
       <div className={classes.new__recipe}>
         <Ui.BackgroundImage
@@ -28,6 +45,7 @@ export class NewRecipe extends Component {
           cssStyles={this.state.backgroundImage.cssStyles}
         />
         <Ui.Overlay />
+        <Ui.Wrapper dimensions={wrapperDimensions} />
       </div>
     );
   }
