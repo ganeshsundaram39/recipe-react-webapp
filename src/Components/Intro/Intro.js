@@ -22,7 +22,7 @@ export class Intro extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.showWrapper();
-    }, 1000); //7000
+    }, this.props.showTime);
   }
 
   showWrapper() {
@@ -38,7 +38,8 @@ export class Intro extends React.Component {
   render() {
     const wrapperStyles = {
       height: this.state.showWrapper ? '50%' : '0%',
-      width: '50%'
+      width: '50%',
+      alignItems: 'center'
     };
     return (
       <div className={classes.intro}>
@@ -48,7 +49,7 @@ export class Intro extends React.Component {
           cssStyles={this.state.backgroundImage.cssStyles}
         />
         <Ui.Overlay />
-        <Ui.Wrapper dimensions={wrapperStyles}>
+        <Ui.Wrapper wrapperStyles={wrapperStyles}>
           <div className={classes.next__action}>
             <Ui.Button
               button__Type="dark__button"
@@ -64,7 +65,9 @@ export class Intro extends React.Component {
             </Ui.Button>
           </div>
         </Ui.Wrapper>
-        {this.state.showWrapper ? null : <Ui.LoadingScreen />}
+        {this.state.showWrapper || this.props.activeWindow === 'Menu' ? null : (
+          <Ui.LoadingScreen />
+        )}
       </div>
     );
   }

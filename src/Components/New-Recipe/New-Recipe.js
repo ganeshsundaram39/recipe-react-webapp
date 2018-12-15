@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './New-Recipe.module.scss';
 import { Ui } from '../Ui-Components/Ui-Components';
+
 export class NewRecipe extends Component {
   static propTypes = {
     navigateTo: PropTypes.func.isRequired
@@ -18,12 +19,13 @@ export class NewRecipe extends Component {
     };
   }
   changeActiveWindow(windowName = 'Intro') {
+    console.log(windowName);
     this.props.navigateTo(windowName);
   }
   componentDidMount() {
     setTimeout(() => {
       this.showWrapper();
-    }, 500); //7000
+    }, 40);
   }
 
   showWrapper() {
@@ -32,9 +34,11 @@ export class NewRecipe extends Component {
     });
   }
   render() {
-    const wrapperDimensions = {
-      height: this.state.showWrapper ? '80%' : '0%',
-      width: '80%'
+    const wrapperStyles = {
+      height: this.state.showWrapper ? '85%' : '0%',
+      width: '70%',
+      padding: '2% 3%',
+      flexWrap: 'wrap'
     };
 
     return (
@@ -45,10 +49,25 @@ export class NewRecipe extends Component {
           cssStyles={this.state.backgroundImage.cssStyles}
         />
         <Ui.Overlay />
-        <Ui.Wrapper dimensions={wrapperDimensions} />
+        <Ui.Wrapper wrapperStyles={wrapperStyles}>
+          <div className={classes.navigation}>
+            <Ui.Button
+              button__Type="dark__button"
+              handleOnClick={this.changeActiveWindow.bind(this, 'Menu')}
+            >
+              Menu
+            </Ui.Button>
+          </div>
+          <div className={classes['recipe__inputs']}>
+            <input
+              type="text"
+              className={classes['recipe__name']}
+              placeholder="Recipe Name"
+              autoFocus
+            />
+          </div>
+        </Ui.Wrapper>
       </div>
     );
   }
 }
-
-export default NewRecipe;

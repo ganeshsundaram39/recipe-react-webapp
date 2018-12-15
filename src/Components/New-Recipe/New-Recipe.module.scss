@@ -1,7 +1,39 @@
+@import '../../assests/scss/variables.scss';
+%inputCommons {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid black;
+  padding: 4px;
+  color: $base;
+  word-spacing: 2px;
+  letter-spacing: 2px;
+  &::placeholder {
+    color: $base;
+  }
+}
 .new__recipe {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
+  .navigation,
+  .recipe__inputs {
+    flex-basis: 100%;
+  }
+  .navigation {
+    height: 15%;
+    padding: 0 1%;
+  }
+  .recipe__inputs {
+    height: 85%;
+    padding: 2%;
+    .recipe__name {
+      @extend %inputCommons;
+      width: 80%;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
 }

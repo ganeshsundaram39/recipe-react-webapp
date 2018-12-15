@@ -15,7 +15,22 @@ export class Main extends React.Component {
     let display = null;
     switch (this.state.activeWindow) {
       case 'Intro':
-        display = <Intro navigateTo={this.changeActiveWindow} />;
+        display = (
+          <Intro
+            showTime={7000}
+            activeWindow={this.state.activeWindow}
+            navigateTo={this.changeActiveWindow}
+          />
+        );
+        break;
+      case 'Menu':
+        display = (
+          <Intro
+            showTime={50}
+            activeWindow={this.state.activeWindow}
+            navigateTo={this.changeActiveWindow}
+          />
+        );
         break;
       case 'New-Recipe':
         display = <NewRecipe navigateTo={this.changeActiveWindow} />;
