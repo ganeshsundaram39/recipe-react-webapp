@@ -1,5 +1,5 @@
 @import './assests/scss/variables';
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+@import url('https://fonts.googleapis.com/css?family=Lato:400');
 
 * {
   margin: 0;
@@ -17,4 +17,8 @@
 body {
   background: $primary-background;
   overflow: hidden;
+}
+
+::selection {
+  background: $base;
 }

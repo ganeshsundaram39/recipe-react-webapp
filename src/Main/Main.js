@@ -17,13 +17,13 @@ export class Main extends React.Component {
       case 'Intro':
         display = (
           <Intro
-            showTime={7000}
+            showTime={50} // 7000
             activeWindow={this.state.activeWindow}
             navigateTo={this.changeActiveWindow}
           />
         );
         break;
-      case 'Menu':
+      case 'Main':
         display = (
           <Intro
             showTime={50}
@@ -33,7 +33,9 @@ export class Main extends React.Component {
         );
         break;
       case 'New-Recipe':
-        display = <NewRecipe navigateTo={this.changeActiveWindow} />;
+        display = (
+          <NewRecipe showTime={50} navigateTo={this.changeActiveWindow} />
+        );
         break;
       default:
         display = null;

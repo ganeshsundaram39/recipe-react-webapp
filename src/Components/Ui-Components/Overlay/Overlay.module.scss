@@ -1,3 +1,4 @@
+@import '../../../assests/scss/variables';
 .overlay {
   position: absolute;
   z-index: 100;
@@ -5,5 +6,5 @@
   width: 400%;
   top: 0;
   left: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  background: linear-gradient(rgba($black, 0.4), rgba($black, 0.4));
 }

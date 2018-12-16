@@ -25,7 +25,9 @@ export class NewRecipe extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.showWrapper();
-    }, 40);
+      this.recipeName.focus();
+      document.title = 'Recipe App | New Recipe';
+    }, this.props.showTime);
   }
 
   showWrapper() {
@@ -38,7 +40,8 @@ export class NewRecipe extends Component {
       height: this.state.showWrapper ? '85%' : '0%',
       width: '70%',
       padding: '2% 3%',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      alignItems: 'center'
     };
 
     return (
@@ -51,19 +54,27 @@ export class NewRecipe extends Component {
         <Ui.Overlay />
         <Ui.Wrapper wrapperStyles={wrapperStyles}>
           <div className={classes.navigation}>
+            <div className={classes['page__name']}>New Recipe</div>
             <Ui.Button
               button__Type="dark__button"
-              handleOnClick={this.changeActiveWindow.bind(this, 'Menu')}
+              handleOnClick={this.changeActiveWindow.bind(this, 'Main')}
             >
-              Menu
+              Main <i className="far fa-compass" />
             </Ui.Button>
           </div>
           <div className={classes['recipe__inputs']}>
             <input
+              ref={inp => {
+                this.recipeName = inp;
+              }}
               type="text"
-              className={classes['recipe__name']}
-              placeholder="Recipe Name"
-              autoFocus
+              className={classes['recipe__title']}
+              placeholder="Title?"
+            />
+            <input
+              type="text"
+              className={classes['recipe__writer']}
+              placeholder="Writer?"
             />
           </div>
         </Ui.Wrapper>

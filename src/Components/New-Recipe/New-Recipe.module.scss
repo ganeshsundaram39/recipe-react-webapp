@@ -2,14 +2,21 @@
 %inputCommons {
   background: transparent;
   border: 0;
-  border-bottom: 2px solid black;
-  padding: 4px;
+  border-bottom: 2px solid $black;
+  padding: 4px 0;
   color: $base;
   word-spacing: 2px;
   letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 2% 0;
   &::placeholder {
     color: $base;
   }
+}
+@mixin inputStyles($widthPercent, $fontSize: 1rem, $fontWeight: 400) {
+  width: $widthPercent;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
 }
 .new__recipe {
   display: flex;
@@ -23,17 +30,45 @@
   }
   .navigation {
     height: 15%;
-    padding: 0 1%;
-  }
-  .recipe__inputs {
-    height: 85%;
-    padding: 2%;
-    .recipe__name {
-      @extend %inputCommons;
-      width: 80%;
-      font-size: 1.1rem;
-      font-weight: 600;
+    padding: 0 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: all 0.2s ease-in-out;
+    .page__name {
+      font-size: 1.4rem;
       text-transform: uppercase;
+      letter-spacing: 2px;
+      word-spacing: 2px;
+      color: rgba($black, 0.85);
+      font-weight: 600;
     }
+  }
+}
+
+.recipe__inputs {
+  height: 85%;
+  padding: 2%;
+  transition: all 0.2s ease-in-out;
+  .recipe__title,
+  .recipe__writer {
+    @extend %inputCommons;
+  }
+  .recipe__title {
+    $inputStyles: (
+      widthPercent: 60%,
+      fontSize: 1.2rem,
+      fontWeight: 600
+    );
+    @include inputStyles($inputStyles...);
+  }
+  .recipe__writer {
+    $inputStyles: (
+      widthPercent: 40%,
+      fontSize: 1.2rem,
+      fontWeight: 600
+    );
+    @include inputStyles($inputStyles...);
   }
 }
