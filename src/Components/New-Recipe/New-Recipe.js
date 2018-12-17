@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './New-Recipe.module.scss';
 import { Ui } from '../Ui-Components/Ui-Components';
-
+import BasicInfo from './Basic-Info/Basic-Info';
 export class NewRecipe extends Component {
   static propTypes = {
     navigateTo: PropTypes.func.isRequired
@@ -15,21 +15,36 @@ export class NewRecipe extends Component {
         name: 'fruits',
         url: 'fruits.jpeg',
         cssStyles: {}
+      },
+      recipeInfo: {
+        title: '',
+        writer: '',
+        imageUrl: ''
       }
     };
   }
   changeActiveWindow(windowName = 'Intro') {
-    console.log(windowName);
     this.props.navigateTo(windowName);
   }
   componentDidMount() {
     setTimeout(() => {
       this.showWrapper();
-      this.recipeName.focus();
       document.title = 'Recipe App | New Recipe';
     }, this.props.showTime);
   }
-
+  setRecipeInfo = (inputType, inputValue) => {
+    // One Approach
+    // const recipeInfo = { ...this.state.recipeInfo };
+    // recipeInfo[inputType] = inputValue;
+    // this.setState({
+    //   recipeInfo
+    // });
+    this.setState(prevState => {
+      return {
+        recipeInfo: { ...prevState.recipeInfo, [inputType]: inputValue }
+      };
+    });
+  };
   showWrapper() {
     this.setState({
       showWrapper: true
@@ -62,19 +77,10 @@ export class NewRecipe extends Component {
               Main <i className="far fa-compass" />
             </Ui.Button>
           </div>
-          <div className={classes['recipe__inputs']}>
-            <input
-              ref={inp => {
-                this.recipeName = inp;
-              }}
-              type="text"
-              className={classes['recipe__title']}
-              placeholder="Title?"
-            />
-            <input
-              type="text"
-              className={classes['recipe__writer']}
-              placeholder="Writer?"
+          <div className={classes['recipe__information']}>
+            <BasicInfo
+              recipeInfo={this.state.recipeInfo}
+              setRecipeInfo={this.setRecipeInfo}
             />
           </div>
         </Ui.Wrapper>

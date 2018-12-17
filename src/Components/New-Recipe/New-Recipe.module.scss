@@ -1,23 +1,5 @@
 @import '../../assests/scss/variables.scss';
-%inputCommons {
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid $black;
-  padding: 4px 0;
-  color: $base;
-  word-spacing: 2px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 2% 0;
-  &::placeholder {
-    color: $base;
-  }
-}
-@mixin inputStyles($widthPercent, $fontSize: 1rem, $fontWeight: 400) {
-  width: $widthPercent;
-  font-size: $fontSize;
-  font-weight: $fontWeight;
-}
+
 .new__recipe {
   display: flex;
   align-items: center;
@@ -47,28 +29,9 @@
   }
 }
 
-.recipe__inputs {
+.recipe__information {
   height: 85%;
+  width: 100%;
   padding: 2%;
   transition: all 0.2s ease-in-out;
-  .recipe__title,
-  .recipe__writer {
-    @extend %inputCommons;
-  }
-  .recipe__title {
-    $inputStyles: (
-      widthPercent: 60%,
-      fontSize: 1.2rem,
-      fontWeight: 600
-    );
-    @include inputStyles($inputStyles...);
-  }
-  .recipe__writer {
-    $inputStyles: (
-      widthPercent: 40%,
-      fontSize: 1.2rem,
-      fontWeight: 600
-    );
-    @include inputStyles($inputStyles...);
-  }
 }
