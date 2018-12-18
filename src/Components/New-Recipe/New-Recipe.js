@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classes from './New-Recipe.module.scss';
 import { Ui } from '../Ui-Components/Ui-Components';
 import BasicInfo from './Basic-Info/Basic-Info';
+import ChangeTabs from './Change-Tabs/Change-Tabs';
 export class NewRecipe extends Component {
   static propTypes = {
     navigateTo: PropTypes.func.isRequired
@@ -20,11 +21,15 @@ export class NewRecipe extends Component {
         title: '',
         writer: '',
         imageUrl: ''
-      }
+      },
+      currentTab: 'Basic Info'
     };
   }
   changeActiveWindow(windowName = 'Intro') {
     this.props.navigateTo(windowName);
+  }
+  changeActiveTab(tabName = 'Basic Info') {
+    this.currentTab = tabName;
   }
   componentDidMount() {
     setTimeout(() => {
@@ -58,7 +63,6 @@ export class NewRecipe extends Component {
       flexWrap: 'wrap',
       alignItems: 'center'
     };
-
     return (
       <div className={classes.new__recipe}>
         <Ui.BackgroundImage
@@ -82,6 +86,9 @@ export class NewRecipe extends Component {
               recipeInfo={this.state.recipeInfo}
               setRecipeInfo={this.setRecipeInfo}
             />
+            <div className={classes['actions']}>
+              <ChangeTabs changeActiveTab={this.changeActiveTab.bind(this)} />
+            </div>
           </div>
         </Ui.Wrapper>
       </div>
