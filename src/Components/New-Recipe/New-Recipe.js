@@ -4,9 +4,11 @@ import classes from './New-Recipe.module.scss';
 import { Ui } from '../Ui-Components/Ui-Components';
 import BasicInfo from './Basic-Info/Basic-Info';
 import ChangeTabs from './Change-Tabs/Change-Tabs';
+import Ingredients from './Ingredients/Ingredients';
 export class NewRecipe extends Component {
   static propTypes = {
-    navigateTo: PropTypes.func.isRequired
+    navigateTo: PropTypes.func.isRequired,
+    showTime: PropTypes.number.isRequired
   };
   constructor(props) {
     super(props);
@@ -29,7 +31,7 @@ export class NewRecipe extends Component {
     this.props.navigateTo(windowName);
   }
   changeActiveTab(tabName = 'Basic Info') {
-    this.currentTab = tabName;
+    this.setState({ currentTab: tabName });
   }
   componentDidMount() {
     setTimeout(() => {
@@ -38,12 +40,13 @@ export class NewRecipe extends Component {
     }, this.props.showTime);
   }
   setRecipeInfo = (inputType, inputValue) => {
-    // One Approach
+    // Old Approach
     // const recipeInfo = { ...this.state.recipeInfo };
     // recipeInfo[inputType] = inputValue;
     // this.setState({
     //   recipeInfo
     // });
+    // Modern Approach
     this.setState(prevState => {
       return {
         recipeInfo: { ...prevState.recipeInfo, [inputType]: inputValue }
@@ -63,6 +66,23 @@ export class NewRecipe extends Component {
       flexWrap: 'wrap',
       alignItems: 'center'
     };
+    let currentTabJsx = null;
+
+    switch (this.state.currentTab) {
+      case 'Basic Info':
+        currentTabJsx = (
+          <BasicInfo
+            recipeInfo={this.state.recipeInfo}
+            setRecipeInfo={this.setRecipeInfo}
+          />
+        );
+        break;
+      case 'Ingredients':
+        currentTabJsx = <Ingredients />;
+        break;
+      default:
+        break;
+    }
     return (
       <div className={classes.new__recipe}>
         <Ui.BackgroundImage
@@ -82,12 +102,12 @@ export class NewRecipe extends Component {
             </Ui.Button>
           </div>
           <div className={classes['recipe__information']}>
-            <BasicInfo
-              recipeInfo={this.state.recipeInfo}
-              setRecipeInfo={this.setRecipeInfo}
-            />
+            {currentTabJsx}
             <div className={classes['actions']}>
-              <ChangeTabs changeActiveTab={this.changeActiveTab.bind(this)} />
+              <ChangeTabs
+                currentTab={this.state.currentTab}
+                changeActiveTab={this.changeActiveTab.bind(this)}
+              />
             </div>
           </div>
         </Ui.Wrapper>
