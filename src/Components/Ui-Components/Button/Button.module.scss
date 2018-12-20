@@ -1,4 +1,4 @@
-@import '../../../assests/scss/variables';
+@import '../../../assets/scss/variables';
 %commons {
   border-radius: 30px;
   border: 2px solid;
@@ -29,4 +29,7 @@
   background: $white;
   color: $base;
   border-color: $base;
+  i {
+    color: rgba($black, 0.9);
+  }
 }

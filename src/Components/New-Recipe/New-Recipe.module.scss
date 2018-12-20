@@ -1,4 +1,4 @@
-@import '../../assests/scss/variables.scss';
+@import '../../assets/scss/variables.scss';
 
 .new__recipe {
   display: flex;
@@ -37,6 +37,7 @@
   .actions {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     height: 20%;
     width: 100%;
   }

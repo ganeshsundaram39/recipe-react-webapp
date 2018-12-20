@@ -5,6 +5,8 @@ import { Ui } from '../Ui-Components/Ui-Components';
 import BasicInfo from './Basic-Info/Basic-Info';
 import ChangeTabs from './Change-Tabs/Change-Tabs';
 import Ingredients from './Ingredients/Ingredients';
+import Process from './Process/Process';
+import MoreInfo from './More-Info/More-Info';
 export class NewRecipe extends Component {
   static propTypes = {
     navigateTo: PropTypes.func.isRequired,
@@ -80,7 +82,14 @@ export class NewRecipe extends Component {
       case 'Ingredients':
         currentTabJsx = <Ingredients />;
         break;
+      case 'Process':
+        currentTabJsx = <Process />;
+        break;
+      case 'More Info':
+        currentTabJsx = <MoreInfo />;
+        break;
       default:
+        console.error('Tab not found');
         break;
     }
     return (
