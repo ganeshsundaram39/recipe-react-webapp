@@ -18,6 +18,7 @@ export default class ChangeTabs extends Component {
   render() {
     const tabIndex = this.tabs.findIndex(tab => tab === this.props.currentTab);
     let buttons = null;
+
     switch (true) {
       case tabIndex === 0:
         buttons = (
@@ -73,7 +74,7 @@ export default class ChangeTabs extends Component {
                 this.tabs[tabIndex]
               )}
             >
-              {this.tabs[tabIndex]} <i className="far fa-save" />
+              Save <i className="far fa-save" />
             </Ui.Button>
           </>
         );

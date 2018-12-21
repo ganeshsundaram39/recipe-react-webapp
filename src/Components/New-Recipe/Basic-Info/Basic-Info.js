@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './Basic-Info.module.scss';
+import { Ui } from '../../Ui-Components/Ui-Components';
 
 export default class BasicInfo extends Component {
   static propTypes = {
@@ -11,22 +12,31 @@ export default class BasicInfo extends Component {
     this.props.setRecipeInfo(inputType, event.target.value);
   }
   render() {
+    const titleStyle = {
+      width: '60%',
+      fontSize: '1.2rem',
+      fontWeight: 600
+    };
+    const writerStyle = {
+      width: '40%',
+      fontSize: '1.2rem',
+      fontWeight: 600
+    };
     return (
       <div className={classes['recipe__basic']}>
-        <input
-          autoFocus
-          type="text"
-          className={classes['recipe__title']}
+        <Ui.Input
           placeholder="Title?"
-          onChange={this.setRecipeInfo.bind(this, 'title')}
+          style={titleStyle}
+          handleOnChange={this.setRecipeInfo.bind(this, 'title')}
           value={this.props.recipeInfo.title}
+          hasAutoFocus="true"
         />
-        <input
-          type="text"
-          className={classes['recipe__writer']}
+        <Ui.Input
           placeholder="Writer?"
-          onChange={this.setRecipeInfo.bind(this, 'writer')}
+          style={writerStyle}
+          handleOnChange={this.setRecipeInfo.bind(this, 'writer')}
           value={this.props.recipeInfo.writer}
+          hasAutoFocus="false"
         />
       </div>
     );
