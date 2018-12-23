@@ -24,7 +24,8 @@ export class NewRecipe extends Component {
       recipeInfo: {
         title: '',
         writer: '',
-        imageUrl: ''
+        imageUrl: '',
+        tags: []
       },
       currentTab: 'Basic Info'
     };
@@ -34,12 +35,6 @@ export class NewRecipe extends Component {
   }
   changeActiveTab(tabName = 'Basic Info') {
     this.setState({ currentTab: tabName });
-  }
-  componentDidMount() {
-    setTimeout(() => {
-      this.showWrapper();
-      document.title = 'Recipe App | New Recipe';
-    }, this.props.showTime);
   }
   setRecipeInfo = (inputType, inputValue) => {
     // Old Approach
@@ -55,10 +50,28 @@ export class NewRecipe extends Component {
       };
     });
   };
+  setTagsForRecipe = tag => {
+    if (tag.trim() && !this.state.recipeInfo.tags.includes(tag)) {
+      this.setState(prevState => {
+        return {
+          recipeInfo: {
+            ...prevState.recipeInfo,
+            tags: [...prevState.recipeInfo.tags, tag]
+          }
+        };
+      });
+    }
+  };
   showWrapper() {
     this.setState({
       showWrapper: true
     });
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.showWrapper();
+      document.title = 'Recipe App | New Recipe';
+    }, this.props.showTime);
   }
   render() {
     const wrapperStyles = {
@@ -76,6 +89,7 @@ export class NewRecipe extends Component {
           <BasicInfo
             recipeInfo={this.state.recipeInfo}
             setRecipeInfo={this.setRecipeInfo}
+            setTagsForRecipe={this.setTagsForRecipe}
           />
         );
         break;

@@ -21,6 +21,7 @@ export class Intro extends React.Component {
 
   componentDidMount() {
     setTimeout(() => {
+      document.title = 'Recipe App';
       this.showWrapper();
     }, this.props.showTime);
   }
