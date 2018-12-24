@@ -36,6 +36,7 @@ export class NewRecipe extends Component {
   changeActiveTab(tabName = 'Basic Info') {
     this.setState({ currentTab: tabName });
   }
+
   setRecipeInfo = (inputType, inputValue) => {
     // Old Approach
     // const recipeInfo = { ...this.state.recipeInfo };
@@ -61,6 +62,16 @@ export class NewRecipe extends Component {
         };
       });
     }
+  };
+  removeTag = tag => {
+    this.setState(prevState => {
+      return {
+        recipeInfo: {
+          ...prevState.recipeInfo,
+          tags: prevState.recipeInfo.tags.filter(t => t !== tag)
+        }
+      };
+    });
   };
   showWrapper() {
     this.setState({
@@ -90,6 +101,7 @@ export class NewRecipe extends Component {
             recipeInfo={this.state.recipeInfo}
             setRecipeInfo={this.setRecipeInfo}
             setTagsForRecipe={this.setTagsForRecipe}
+            removeTag={this.removeTag}
           />
         );
         break;

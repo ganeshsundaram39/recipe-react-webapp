@@ -7,7 +7,8 @@ export default class BasicInfo extends Component {
   static propTypes = {
     setRecipeInfo: PropTypes.func.isRequired,
     recipeInfo: PropTypes.object.isRequired,
-    setTagsForRecipe: PropTypes.func.isRequired
+    setTagsForRecipe: PropTypes.func.isRequired,
+    removeTag: PropTypes.func.isRequired
   };
   constructor(props) {
     super(props);
@@ -26,6 +27,9 @@ export default class BasicInfo extends Component {
   setTagForRecipe = event => {
     this.setState({ tag: event.target.value });
   };
+  handleOnRemoveTag(tag) {
+    this.props.removeTag(tag);
+  }
   componentDidUpdate = (prevProps, prevState) => {
     if (
       this.props.recipeInfo.tags.length !== prevProps.recipeInfo.tags.length
@@ -46,6 +50,13 @@ export default class BasicInfo extends Component {
     };
     const tags = this.props.recipeInfo.tags.map(tag => (
       <span className={classes['tag']} key={uniqid()}>
+        <div
+          className={classes['remove']}
+          title="Remove"
+          onClick={this.handleOnRemoveTag.bind(this, tag)}
+        >
+          <i className="fas fa-times" />
+        </div>
         <i className="fas fa-hashtag" />
         {tag}
       </span>
@@ -80,7 +91,11 @@ export default class BasicInfo extends Component {
             setFocus={false}
           />
           <div className={classes['press__Enter']}>
-            <i className="fas fa-level-down-alt" ref={this.enterIcon} />
+            <i
+              className="fas fa-level-down-alt"
+              ref={this.enterIcon}
+              title="Press enter after tag!"
+            />
           </div>
         </div>
         <div className={classes['tags']} style={tagsBackground}>
