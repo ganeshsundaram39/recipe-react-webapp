@@ -25,7 +25,8 @@ export class NewRecipe extends Component {
         title: '',
         writer: '',
         imageUrl: '',
-        tags: []
+        tags: [],
+        ingredients: []
       },
       currentTab: 'Basic Info'
     };
@@ -36,7 +37,14 @@ export class NewRecipe extends Component {
   changeActiveTab(tabName = 'Basic Info') {
     this.setState({ currentTab: tabName });
   }
-
+  addIngredient = ingredient => {
+    this.setState(prevState => {
+      return {
+        ...prevState.recipeInfo,
+        ingredients: [...prevState.recipeInfo.ingredients, ingredient]
+      };
+    });
+  };
   setRecipeInfo = (inputType, inputValue) => {
     // Old Approach
     // const recipeInfo = { ...this.state.recipeInfo };
@@ -106,7 +114,7 @@ export class NewRecipe extends Component {
         );
         break;
       case 'Ingredients':
-        currentTabJsx = <Ingredients />;
+        currentTabJsx = <Ingredients addIngredient={this.addIngredient} />;
         break;
       case 'Process':
         currentTabJsx = <Process />;

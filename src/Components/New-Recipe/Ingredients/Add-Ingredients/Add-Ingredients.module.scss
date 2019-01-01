@@ -1,7 +1,32 @@
 @import '../../../../assets/scss/variables';
 .add__ingredient {
-  width: 40%;
+  width: 50%;
   height: 100%;
+  display: flex;
+  .add__ingredient--input {
+    width: 75%;
+    height: 100%;
+    .ingredient__name {
+      height: 20%;
+    }
+  }
+  .add__to--list {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .add__bg {
+      background: $white;
+      border-radius: 30px;
+      padding: 11px;
+      i {
+        font-size: 1.7rem;
+        color: $base;
+        cursor: pointer;
+      }
+    }
+  }
 }
 .upload__btn--wrapper {
   position: relative;
@@ -16,13 +41,13 @@
   background-position: center center;
   // background-size: 70% 70%;
   background-repeat: no-repeat;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba($black, 0.3);
   .btn {
     border: 0;
     border-radius: 70px;
     background: $base;
     i {
-      color: #fff;
+      color: $white;
       font-size: 2rem;
       cursor: pointer;
     }

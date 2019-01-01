@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classes from './Ingredients.module.scss';
 import DefaultBackground from '../../../assets/images/imageupload.svg';
 import AddIngredients from './Add-Ingredients/Add-Ingredients';
 import ListOfIngredients from './List-Of-Ingredients/List-Of-Ingredients';
+
 export default class Ingredients extends Component {
-  // static propTypes = {};
+  static propTypes = { addIngredient: PropTypes.func.isRequired };
   constructor(props) {
     super(props);
     this.state = {
-      ingredient: {
-        name: '',
-        image: DefaultBackground,
-        size: '70% 70%'
-      }
+      ingredient: { name: '', image: DefaultBackground, size: '70% 70%' }
     };
   }
   setIngredientName(event) {
@@ -22,7 +19,10 @@ export default class Ingredients extends Component {
       return { ingredient: { ...prevState.ingredient, name: ingredientName } };
     });
   }
-
+  addIngredient = () => {
+    const { name, image } = this.state.ingredient;
+    this.props.addIngredient({ name, image });
+  };
   readURL(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -48,6 +48,7 @@ export default class Ingredients extends Component {
           ingredient={this.state.ingredient}
           handleOnFileChange={this.readURL.bind(this)}
           setName={this.setIngredientName.bind(this)}
+          addIngredient={this.addIngredient.bind(this)}
         />
         <ListOfIngredients />
       </div>

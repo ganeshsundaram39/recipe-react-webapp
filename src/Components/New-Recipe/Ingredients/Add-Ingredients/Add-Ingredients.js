@@ -13,28 +13,35 @@ const AddIngredients = props => {
   };
   return (
     <div className={classes['add__ingredient']}>
-      <div
-        className={classes['upload__btn--wrapper']}
-        style={style.ingredientImage}
-      >
-        <button className={classes['btn']}>
-          <i className="fas fa-plus-circle" />
-        </button>
-        <input
-          type="file"
-          name="myfile"
-          accept="image/*"
-          onChange={props.handleOnFileChange}
-        />
+      <div className={classes['add__ingredient--input']}>
+        <div
+          className={classes['upload__btn--wrapper']}
+          style={style.ingredientImage}
+        >
+          <button className={classes['btn']}>
+            <i className="fas fa-plus-circle" />
+          </button>
+          <input
+            type="file"
+            name="myfile"
+            accept="image/*"
+            onChange={props.handleOnFileChange}
+          />
+        </div>
+        <div className={classes['ingredient__name']}>
+          <Ui.Input
+            placeholder="Ingredient Name?"
+            style={style['ingredient__name']}
+            handleOnChange={props.setName}
+            value={props.ingredient.name}
+            setFocus={true}
+          />
+        </div>
       </div>
-      <div className={classes['ingredient__name']}>
-        <Ui.Input
-          placeholder="Ingredient Name?"
-          style={style['ingredient__name']}
-          handleOnChange={props.setName}
-          value={props.ingredient.name}
-          setFocus={true}
-        />
+      <div className={classes['add__to--list']}>
+        <span className={classes['add__bg']} onClick={props.addIngredient}>
+          <i className="fas fa-hand-point-right" />
+        </span>
       </div>
     </div>
   );
@@ -43,7 +50,8 @@ const AddIngredients = props => {
 AddIngredients.propTypes = {
   ingredient: PropTypes.object.isRequired,
   setName: PropTypes.func.isRequired,
-  handleOnFileChange: PropTypes.func.isRequired
+  handleOnFileChange: PropTypes.func.isRequired,
+  addIngredient: PropTypes.func.isRequired
 };
 
 export default AddIngredients;
