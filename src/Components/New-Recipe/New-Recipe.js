@@ -40,8 +40,10 @@ export class NewRecipe extends Component {
   addIngredient = ingredient => {
     this.setState(prevState => {
       return {
-        ...prevState.recipeInfo,
-        ingredients: [...prevState.recipeInfo.ingredients, ingredient]
+        recipeInfo: {
+          ...prevState.recipeInfo,
+          ingredients: [...prevState.recipeInfo.ingredients, ingredient]
+        }
       };
     });
   };
@@ -114,7 +116,12 @@ export class NewRecipe extends Component {
         );
         break;
       case 'Ingredients':
-        currentTabJsx = <Ingredients addIngredient={this.addIngredient} />;
+        currentTabJsx = (
+          <Ingredients
+            addIngredient={this.addIngredient}
+            ingredients={[...this.state.recipeInfo.ingredients]}
+          />
+        );
         break;
       case 'Process':
         currentTabJsx = <Process />;

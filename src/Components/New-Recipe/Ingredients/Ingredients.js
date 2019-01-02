@@ -6,7 +6,10 @@ import AddIngredients from './Add-Ingredients/Add-Ingredients';
 import ListOfIngredients from './List-Of-Ingredients/List-Of-Ingredients';
 
 export default class Ingredients extends Component {
-  static propTypes = { addIngredient: PropTypes.func.isRequired };
+  static propTypes = {
+    addIngredient: PropTypes.func.isRequired,
+    ingredients: PropTypes.array.isRequired
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +25,13 @@ export default class Ingredients extends Component {
   addIngredient = () => {
     const { name, image } = this.state.ingredient;
     this.props.addIngredient({ name, image });
+    this.setState({
+      ingredient: {
+        name: '',
+        image: DefaultBackground,
+        size: '70% 70%'
+      }
+    });
   };
   readURL(event) {
     if (event.target.files && event.target.files[0]) {
@@ -50,7 +60,7 @@ export default class Ingredients extends Component {
           setName={this.setIngredientName.bind(this)}
           addIngredient={this.addIngredient.bind(this)}
         />
-        <ListOfIngredients />
+        <ListOfIngredients ingredients={this.props.ingredients} />
       </div>
     );
   }

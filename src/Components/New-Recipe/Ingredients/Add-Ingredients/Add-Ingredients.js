@@ -19,7 +19,7 @@ const AddIngredients = props => {
           style={style.ingredientImage}
         >
           <button className={classes['btn']}>
-            <i className="fas fa-plus-circle" />
+            <i className="fas fa-plus" />
           </button>
           <input
             type="file"
