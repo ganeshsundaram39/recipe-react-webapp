@@ -74,6 +74,7 @@ export default class BasicInfo extends Component {
             handleOnChange={this.setRecipeInfo.bind(this, 'title')}
             value={this.props.recipeInfo.title}
             setFocus={true}
+            validationErrorMessage={false}
           />
           <Ui.Input
             placeholder="Writer?"
@@ -81,6 +82,7 @@ export default class BasicInfo extends Component {
             handleOnChange={this.setRecipeInfo.bind(this, 'writer')}
             value={this.props.recipeInfo.writer}
             setFocus={false}
+            validationErrorMessage={false}
           />
           <Ui.Input
             placeholder="Tags?"
@@ -89,6 +91,7 @@ export default class BasicInfo extends Component {
             handleOnChange={this.setTagForRecipe}
             value={this.state.tag}
             setFocus={false}
+            validationErrorMessage={false}
           />
           <div className={classes['press__Enter']}>
             <i

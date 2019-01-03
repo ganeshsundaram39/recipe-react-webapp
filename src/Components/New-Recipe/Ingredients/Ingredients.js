@@ -13,7 +13,8 @@ export default class Ingredients extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredient: { name: '', image: DefaultBackground, size: '70% 70%' }
+      ingredient: { name: '', image: DefaultBackground, size: '70% 70%' },
+      validationErrorMessage: { name: false, image: false }
     };
   }
   setIngredientName(event) {
@@ -24,14 +25,37 @@ export default class Ingredients extends Component {
   }
   addIngredient = () => {
     const { name, image } = this.state.ingredient;
-    this.props.addIngredient({ name, image });
-    this.setState({
-      ingredient: {
-        name: '',
-        image: DefaultBackground,
-        size: '70% 70%'
+    if (name !== '' && image !== DefaultBackground) {
+      this.props.addIngredient({ name, image });
+      this.setState({
+        ingredient: {
+          name: '',
+          image: DefaultBackground,
+          size: '70% 70%'
+        }
+      });
+    } else {
+      let element = null;
+      switch (true) {
+        case name === '' && image === DefaultBackground:
+          element = { name: true, image: true };
+          break;
+        case name === '':
+          element = { name: true, image: false };
+          break;
+        case image === '':
+          element = { name: false, image: true };
+          break;
+        default:
+          break;
       }
-    });
+      this.setState({ validationErrorMessage: element });
+      setTimeout(() => {
+        this.setState({
+          validationErrorMessage: { name: false, image: false }
+        });
+      }, 100);
+    }
   };
   readURL(event) {
     if (event.target.files && event.target.files[0]) {
@@ -59,6 +83,7 @@ export default class Ingredients extends Component {
           handleOnFileChange={this.readURL.bind(this)}
           setName={this.setIngredientName.bind(this)}
           addIngredient={this.addIngredient.bind(this)}
+          validationErrorElements={this.state.validationErrorMessage}
         />
         <ListOfIngredients ingredients={this.props.ingredients} />
       </div>

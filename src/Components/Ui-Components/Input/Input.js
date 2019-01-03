@@ -9,7 +9,8 @@ export default class Input extends Component {
     handleOnChange: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
     setFocus: PropTypes.bool.isRequired,
-    onKeyPress: PropTypes.func
+    onKeyPress: PropTypes.func,
+    validationErrorMessage: PropTypes.bool.isRequired
   };
   constructor(props) {
     super(props);
@@ -21,13 +22,17 @@ export default class Input extends Component {
     }
   }
   render() {
+    let inputClasses = classes['input'];
+    if (this.props.validationErrorMessage) {
+      inputClasses = [classes['input'], classes['validation']].join(' ');
+    }
     return (
       <>
         <input
           ref={this.inputElement}
           type="text"
           style={this.props.style}
-          className={classes['input']}
+          className={inputClasses}
           placeholder={this.props.placeholder}
           onChange={this.props.handleOnChange}
           value={this.props.value}

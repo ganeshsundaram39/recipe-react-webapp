@@ -11,6 +11,10 @@ const AddIngredients = props => {
       backgroundSize: props.ingredient.size
     }
   };
+  let addImageClasses = classes['btn'];
+  if (props.validationErrorElements.image) {
+    addImageClasses = [classes['btn'], classes['validation']].join(' ');
+  }
   return (
     <div className={classes['add__ingredient']}>
       <div className={classes['add__ingredient--input']}>
@@ -18,7 +22,7 @@ const AddIngredients = props => {
           className={classes['upload__btn--wrapper']}
           style={style.ingredientImage}
         >
-          <button className={classes['btn']}>
+          <button className={addImageClasses}>
             <i className="fas fa-plus" />
           </button>
           <input
@@ -35,6 +39,7 @@ const AddIngredients = props => {
             handleOnChange={props.setName}
             value={props.ingredient.name}
             setFocus={true}
+            validationErrorMessage={props.validationErrorElements.name}
           />
         </div>
       </div>
@@ -51,7 +56,8 @@ AddIngredients.propTypes = {
   ingredient: PropTypes.object.isRequired,
   setName: PropTypes.func.isRequired,
   handleOnFileChange: PropTypes.func.isRequired,
-  addIngredient: PropTypes.func.isRequired
+  addIngredient: PropTypes.func.isRequired,
+  validationErrorElements: PropTypes.object.isRequired
 };
 
 export default AddIngredients;

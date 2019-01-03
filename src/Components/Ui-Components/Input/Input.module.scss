@@ -16,4 +16,16 @@
   &::placeholder {
     color: $base;
   }
+  &.validation {
+    animation: validationSignal 0.2s ease-in-out;
+  }
+}
+
+@keyframes validationSignal {
+  0% {
+    letter-spacing: 2px;
+  }
+  50% {
+    letter-spacing: 4px;
+  }
 }

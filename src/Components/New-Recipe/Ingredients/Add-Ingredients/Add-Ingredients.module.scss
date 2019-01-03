@@ -53,6 +53,9 @@
     padding: 4.3px 5.2px;
     background: #fff;
     box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.25);
+    &.validation {
+      animation: validationSignal 0.2s ease-in-out;
+    }
     i {
       color: $base;
       font-size: 1.2rem;
@@ -67,5 +70,13 @@
     opacity: 0;
     width: 15%;
     height: 20%;
+  }
+}
+@keyframes validationSignal {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
   }
 }
