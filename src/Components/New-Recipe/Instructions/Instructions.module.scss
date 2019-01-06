@@ -1,0 +1,44 @@
+@import '../../../assets/scss/variables.scss';
+.process {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  .single__process {
+    width: 80%;
+    background: $white;
+    padding: 2%;
+    box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.2s ease-in-out;
+    &:hover {
+      box-shadow: -9px 7px 13px rgba(0, 0, 0, 0.25);
+    }
+  }
+  .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25%;
+    flex-basis: 100%;
+    .save,
+    .add {
+      border-radius: 30px;
+      padding: 9px 11px;
+      cursor: pointer;
+      border: 0;
+      margin-right: 2%;
+      background: $white;
+      box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.25);
+      transition: box-shadow 0.2s ease-in-out;
+      &:hover {
+        box-shadow: -9px 7px 13px rgba(0, 0, 0, 0.25);
+      }
+      i {
+        color: $base;
+      }
+    }
+  }
+}

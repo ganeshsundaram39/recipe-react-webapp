@@ -9,7 +9,7 @@ export default class ChangeTabs extends Component {
   };
   constructor(props) {
     super(props);
-    this.tabs = ['Basic Info', 'Ingredients', 'Process', 'More Info'];
+    this.tabs = ['Basic Info', 'Ingredients', 'Instructions', 'More Info'];
   }
 
   changeActiveTab(currentTab) {

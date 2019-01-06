@@ -23,6 +23,14 @@ export default class Ingredients extends Component {
       return { ingredient: { ...prevState.ingredient, name: ingredientName } };
     });
   }
+  removeSelectedImage = () => {
+    this.setState({
+      ingredient: {
+        name: '',
+        image: DefaultBackground,
+         size: '70% 70%' }
+      });
+  };
   addIngredient = () => {
     const { name, image } = this.state.ingredient;
     if (name !== '' && image !== DefaultBackground) {
@@ -76,17 +84,14 @@ export default class Ingredients extends Component {
   }
 
   render() {
-    return (
-      <div className={classes.ingredients}>
-        <AddIngredients
-          ingredient={this.state.ingredient}
-          handleOnFileChange={this.readURL.bind(this)}
-          setName={this.setIngredientName.bind(this)}
-          addIngredient={this.addIngredient.bind(this)}
-          validationErrorElements={this.state.validationErrorMessage}
-        />
+    return <div className={classes.ingredients}>
+        <AddIngredients ingredient={this.state.ingredient}
+        handleOnFileChange={this.readURL.bind(this)}
+        setName={this.setIngredientName.bind(this)}
+        addIngredient={this.addIngredient.bind(this)}
+        validationErrorElements={this.state.validationErrorMessage}
+        removeSelectedImage={this.removeSelectedImage} />
         <ListOfIngredients ingredients={this.props.ingredients} />
-      </div>
-    );
+      </div>;
   }
 }

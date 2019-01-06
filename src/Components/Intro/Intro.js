@@ -60,9 +60,9 @@ export class Intro extends React.Component {
             </Ui.Button>
             <Ui.Button
               button__Type="light__button"
-              handleOnClick={this.changeActiveWindow.bind(this, 'Sign-Up')}
+              handleOnClick={this.changeActiveWindow.bind(this, 'All-Recipes')}
             >
-              Sign Up
+              All Recipes
             </Ui.Button>
           </div>
         </Ui.Wrapper>

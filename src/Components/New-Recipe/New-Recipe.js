@@ -5,7 +5,7 @@ import { Ui } from '../Ui-Components/Ui-Components';
 import BasicInfo from './Basic-Info/Basic-Info';
 import ChangeTabs from './Change-Tabs/Change-Tabs';
 import Ingredients from './Ingredients/Ingredients';
-import Process from './Process/Process';
+import Instructions from './Instructions/Instructions';
 import MoreInfo from './More-Info/More-Info';
 export class NewRecipe extends Component {
   static propTypes = {
@@ -123,8 +123,8 @@ export class NewRecipe extends Component {
           />
         );
         break;
-      case 'Process':
-        currentTabJsx = <Process />;
+      case 'Instructions':
+        currentTabJsx = <Instructions />;
         break;
       case 'More Info':
         currentTabJsx = <MoreInfo />;

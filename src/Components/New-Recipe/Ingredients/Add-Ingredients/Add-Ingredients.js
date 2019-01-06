@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classes from './Add-Ingredients.module.scss';
 import { Ui } from '../../../Ui-Components/Ui-Components';
 
+import DefaultBackground from '../../../../assets/images/imageupload.svg';
 const AddIngredients = props => {
   const style = {
     ingredient__name: { width: '100%', fontSize: '1rem' },
@@ -11,6 +12,13 @@ const AddIngredients = props => {
       backgroundSize: props.ingredient.size
     }
   };
+  let removeSelectedButton =
+    props.ingredient.image !== DefaultBackground ? (
+      <button className={classes['btn']} onClick={props.removeSelectedImage}>
+        <i className="fas fa-minus" />
+      </button>
+    ) : null;
+
   let addImageClasses = classes['btn'];
   if (props.validationErrorElements.image) {
     addImageClasses = [classes['btn'], classes['validation']].join(' ');
@@ -22,6 +30,7 @@ const AddIngredients = props => {
           className={classes['upload__btn--wrapper']}
           style={style.ingredientImage}
         >
+          {removeSelectedButton}
           <button className={addImageClasses}>
             <i className="fas fa-plus" />
           </button>
@@ -34,7 +43,7 @@ const AddIngredients = props => {
         </div>
         <div className={classes['ingredient__name']}>
           <Ui.Input
-            placeholder="Ingredient Name?"
+            placeholder="Name & Qty?"
             style={style['ingredient__name']}
             handleOnChange={props.setName}
             value={props.ingredient.name}
