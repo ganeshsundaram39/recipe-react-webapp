@@ -66,7 +66,8 @@ AddIngredients.propTypes = {
   setName: PropTypes.func.isRequired,
   handleOnFileChange: PropTypes.func.isRequired,
   addIngredient: PropTypes.func.isRequired,
-  validationErrorElements: PropTypes.object.isRequired
+  validationErrorElements: PropTypes.object.isRequired,
+  removeSelectedImage: PropTypes.func.isRequired
 };
 
 export default AddIngredients;

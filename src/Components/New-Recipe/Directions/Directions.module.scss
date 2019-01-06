@@ -1,0 +1,11 @@
+.process {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

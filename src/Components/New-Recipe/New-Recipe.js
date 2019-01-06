@@ -5,7 +5,7 @@ import { Ui } from '../Ui-Components/Ui-Components';
 import BasicInfo from './Basic-Info/Basic-Info';
 import ChangeTabs from './Change-Tabs/Change-Tabs';
 import Ingredients from './Ingredients/Ingredients';
-import Instructions from './Instructions/Instructions';
+import Directions from './Directions/Directions';
 import MoreInfo from './More-Info/More-Info';
 export class NewRecipe extends Component {
   static propTypes = {
@@ -16,17 +16,14 @@ export class NewRecipe extends Component {
     super(props);
     this.state = {
       showWrapper: false,
-      backgroundImage: {
-        name: 'fruits',
-        url: 'fruits.jpeg',
-        cssStyles: {}
-      },
+      backgroundImage: { name: 'fruits', url: 'fruits.jpeg', cssStyles: {} },
       recipeInfo: {
         title: '',
         writer: '',
         imageUrl: '',
         tags: [],
-        ingredients: []
+        ingredients: [],
+        directions: []
       },
       currentTab: 'Basic Info'
     };
@@ -48,13 +45,6 @@ export class NewRecipe extends Component {
     });
   };
   setRecipeInfo = (inputType, inputValue) => {
-    // Old Approach
-    // const recipeInfo = { ...this.state.recipeInfo };
-    // recipeInfo[inputType] = inputValue;
-    // this.setState({
-    //   recipeInfo
-    // });
-    // Modern Approach
     this.setState(prevState => {
       return {
         recipeInfo: { ...prevState.recipeInfo, [inputType]: inputValue }
@@ -84,10 +74,16 @@ export class NewRecipe extends Component {
     });
   };
   showWrapper() {
-    this.setState({
-      showWrapper: true
-    });
+    this.setState({ showWrapper: true });
   }
+  setDirections = directions => {
+    const savedDirections = [...directions];
+    this.setState(prevState => {
+      return {
+        recipeInfo: { ...prevState.recipeInfo, directions: savedDirections }
+      };
+    });
+  };
   componentDidMount() {
     setTimeout(() => {
       this.showWrapper();
@@ -123,8 +119,8 @@ export class NewRecipe extends Component {
           />
         );
         break;
-      case 'Instructions':
-        currentTabJsx = <Instructions />;
+      case 'Directions':
+        currentTabJsx = <Directions setDirections={this.setDirections} />;
         break;
       case 'More Info':
         currentTabJsx = <MoreInfo />;
