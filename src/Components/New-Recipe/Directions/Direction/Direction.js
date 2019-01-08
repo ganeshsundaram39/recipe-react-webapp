@@ -10,7 +10,7 @@ const Direction = props => {
       <div className={classes['count']}>{props.index}. </div>
       <Ui.Input
         placeholder="Take 2 cup of ..."
-        style={{ width: '95%' }}
+        style={{ width: '90%' }}
         handleOnChange={props.editDirection}
         value={props.directionName.trim()}
         setFocus={true}

@@ -10,7 +10,13 @@ export default class Directions extends Component {
   state = {
     directions: [' ']
   };
+  componentDidMount() {
+    this.scrollToBottom();
+  }
 
+  scrollToBottom() {
+    this.el.scrollIntoView({ behavior: 'smooth' });
+  }
   newDirection = () => {
     if (this.state.directions[this.state.directions.length - 1] !== ' ') {
       this.setState(prevState => {
@@ -18,6 +24,7 @@ export default class Directions extends Component {
           directions: [...prevState.directions, ' ']
         };
       });
+      this.scrollToBottom();
     }
   };
   saveDirections = () => {
@@ -26,12 +33,11 @@ export default class Directions extends Component {
     }
   };
   editDirection(index, event) {
-    const direction =
-      event.target.value === '' ? ' ' : event.target.value.trim();
+    const direction = event.target.value;
     this.setState(prevState => {
-      return {
-        directions: [...{ ...prevState.directions, [index]: direction }]
-      };
+      const directions = [...prevState.directions];
+      directions[index] = direction;
+      return { directions: directions };
     });
   }
 
@@ -45,7 +51,12 @@ export default class Directions extends Component {
       />
     ));
     return (
-      <div className={classes.process}>
+      <div
+        className={classes.process}
+        ref={el => {
+          this.el = el;
+        }}
+      >
         {directions}
         <Actions
           newDirection={this.newDirection}
