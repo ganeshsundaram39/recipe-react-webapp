@@ -1,4 +1,51 @@
+@import '../../../assets/scss/variables';
 .more__info {
   height: 80%;
   width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.upload__btn--wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  .btn {
+    border: 0;
+    border-radius: 30px;
+    padding: 7.3px 13.2px;
+    background: #fff;
+    box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.25);
+    margin-left: 3%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    i {
+      color: $base;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin: 0 7px;
+    }
+  }
+  input[type='file'] {
+    font-size: 100px;
+    position: absolute;
+    opacity: 0;
+    width: 30%;
+    height: 65%;
+    margin-left: 3%;
+  }
+  .info {
+    height: 100%;
+    margin-left: 3%;
+    margin-top: 5px;
+    i {
+      color: $base;
+      cursor: pointer;
+    }
+  }
 }
