@@ -4,6 +4,7 @@ import classes from './More-Info.module.scss';
 import '../../../../node_modules/video-react/dist/video-react.css';
 import { Player } from 'video-react';
 import DefaultVideo from '../../../assets/videos/defaultvideo.mp4';
+import { Ui } from '../../Ui-Components/Ui-Components';
 export default class MoreInfo extends Component {
   // static propTypes = {};
   state = { video: { src: DefaultVideo } };
@@ -26,6 +27,10 @@ export default class MoreInfo extends Component {
       video: { src: DefaultVideo }
     });
   };
+  saveRecipe() {}
+  changeActiveTab(tabName = 'Basic Info') {
+    this.props.changeActiveTab(tabName);
+  }
   render() {
     let removeSelectedButton =
       this.state.video.src !== DefaultVideo ? (
@@ -59,8 +64,22 @@ export default class MoreInfo extends Component {
           src={this.state.video.src}
           fluid={false}
           width={'100%'}
-          height={'80%'}
+          height={'60%'}
         />
+        <div className={classes['actions']}>
+          <Ui.Button
+            button__Type="light__button"
+            handleOnClick={this.changeActiveTab.bind(this, 'Directions')}
+          >
+            Directions <i className="far fa-hand-point-left" />
+          </Ui.Button>
+          <Ui.Button
+            button__Type="dark__button"
+            handleOnClick={this.saveRecipe.bind(this)}
+          >
+            Save <i className="far fa-save" />
+          </Ui.Button>
+        </div>
       </div>
     );
   }

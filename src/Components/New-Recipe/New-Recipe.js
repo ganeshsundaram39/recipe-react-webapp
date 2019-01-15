@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classes from './New-Recipe.module.scss';
 import { Ui } from '../Ui-Components/Ui-Components';
 import BasicInfo from './Basic-Info/Basic-Info';
-import ChangeTabs from './Change-Tabs/Change-Tabs';
 import Ingredients from './Ingredients/Ingredients';
 import Directions from './Directions/Directions';
 import MoreInfo from './More-Info/More-Info';
+
 export class NewRecipe extends Component {
   static propTypes = {
     navigateTo: PropTypes.func.isRequired,
@@ -108,6 +108,7 @@ export class NewRecipe extends Component {
             setRecipeInfo={this.setRecipeInfo}
             setTagsForRecipe={this.setTagsForRecipe}
             removeTag={this.removeTag}
+            changeActiveTab={this.changeActiveTab.bind(this)}
           />
         );
         break;
@@ -116,14 +117,22 @@ export class NewRecipe extends Component {
           <Ingredients
             addIngredient={this.addIngredient}
             ingredients={[...this.state.recipeInfo.ingredients]}
+            changeActiveTab={this.changeActiveTab.bind(this)}
           />
         );
         break;
       case 'Directions':
-        currentTabJsx = <Directions setDirections={this.setDirections} />;
+        currentTabJsx = (
+          <Directions
+            setDirections={this.setDirections}
+            changeActiveTab={this.changeActiveTab.bind(this)}
+          />
+        );
         break;
       case 'More Info':
-        currentTabJsx = <MoreInfo />;
+        currentTabJsx = (
+          <MoreInfo changeActiveTab={this.changeActiveTab.bind(this)} />
+        );
         break;
       default:
         console.error('Tab not found');
@@ -147,15 +156,7 @@ export class NewRecipe extends Component {
               Main <i className="far fa-compass" />
             </Ui.Button>
           </div>
-          <div className={classes['recipe__information']}>
-            {currentTabJsx}
-            <div className={classes['actions']}>
-              <ChangeTabs
-                currentTab={this.state.currentTab}
-                changeActiveTab={this.changeActiveTab.bind(this)}
-              />
-            </div>
-          </div>
+          <div className={classes['recipe__information']}>{currentTabJsx}</div>
         </Ui.Wrapper>
       </div>
     );

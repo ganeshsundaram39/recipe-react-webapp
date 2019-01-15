@@ -1,6 +1,6 @@
 @import '../../../assets/scss/variables';
 .recipe__basic {
-  height: 80%;
+  height: 100%;
   width: 100%;
   .press__Enter {
     margin: 2% 0;
@@ -21,7 +21,7 @@
   }
   .tags {
     padding: 2%;
-    height: 50%;
+    height: 30%;
     transition: all 0.5s ease-in-out;
     .tag {
       text-transform: lowercase;
@@ -35,6 +35,13 @@
       display: inline-block;
       cursor: pointer;
     }
+  }
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 20%;
+    width: 100%;
   }
   .tag {
     position: relative;

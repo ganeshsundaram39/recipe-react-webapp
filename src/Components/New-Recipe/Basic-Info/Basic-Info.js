@@ -18,6 +18,9 @@ export default class BasicInfo extends Component {
   setRecipeInfo(inputType, event) {
     this.props.setRecipeInfo(inputType, event.target.value);
   }
+  changeActiveTab(tabName = 'Basic Info') {
+    this.props.changeActiveTab(tabName);
+  }
   handleKeyPress = event => {
     if (event.key === 'Enter') {
       this.props.setTagsForRecipe(this.state.tag);
@@ -103,6 +106,14 @@ export default class BasicInfo extends Component {
         </div>
         <div className={classes['tags']} style={tagsBackground}>
           {tags}
+        </div>
+        <div className={classes['actions']}>
+          <Ui.Button
+            button__Type="dark__button"
+            handleOnClick={this.changeActiveTab.bind(this, 'Ingredients')}
+          >
+            Ingredients <i className="far fa-hand-point-right" />
+          </Ui.Button>
         </div>
       </div>
     );

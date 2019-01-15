@@ -4,7 +4,7 @@ import classes from './Ingredients.module.scss';
 import DefaultBackground from '../../../assets/images/imageupload.svg';
 import AddIngredients from './Add-Ingredients/Add-Ingredients';
 import ListOfIngredients from './List-Of-Ingredients/List-Of-Ingredients';
-
+import { Ui } from '../../Ui-Components/Ui-Components';
 export default class Ingredients extends Component {
   static propTypes = {
     addIngredient: PropTypes.func.isRequired,
@@ -17,6 +17,9 @@ export default class Ingredients extends Component {
       validationErrorMessage: { name: false, image: false }
     };
   }
+  changeActiveTab(tabName = 'Basic Info') {
+    this.props.changeActiveTab(tabName);
+  }
   setIngredientName(event) {
     const ingredientName = event.target.value;
     this.setState(prevState => {
@@ -24,12 +27,15 @@ export default class Ingredients extends Component {
     });
   }
   removeSelectedImage = () => {
-    this.setState({
-      ingredient: {
-        name: '',
-        image: DefaultBackground,
-         size: '70% 70%' }
-      });
+    this.setState(prevState => {
+      return {
+        ingredient: {
+          ...prevState.ingredient,
+          image: DefaultBackground,
+          size: '70% 70%'
+        }
+      };
+    });
   };
   addIngredient = () => {
     const { name, image } = this.state.ingredient;
@@ -84,14 +90,32 @@ export default class Ingredients extends Component {
   }
 
   render() {
-    return <div className={classes.ingredients}>
-        <AddIngredients ingredient={this.state.ingredient}
-        handleOnFileChange={this.readURL.bind(this)}
-        setName={this.setIngredientName.bind(this)}
-        addIngredient={this.addIngredient.bind(this)}
-        validationErrorElements={this.state.validationErrorMessage}
-        removeSelectedImage={this.removeSelectedImage} />
+    return (
+      <div className={classes.ingredients}>
+        <AddIngredients
+          ingredient={this.state.ingredient}
+          handleOnFileChange={this.readURL.bind(this)}
+          setName={this.setIngredientName.bind(this)}
+          addIngredient={this.addIngredient.bind(this)}
+          validationErrorElements={this.state.validationErrorMessage}
+          removeSelectedImage={this.removeSelectedImage}
+        />
         <ListOfIngredients ingredients={this.props.ingredients} />
-      </div>;
+        <div className={classes['actions']}>
+          <Ui.Button
+            button__Type="light__button"
+            handleOnClick={this.changeActiveTab.bind(this, 'Basic Info')}
+          >
+            Basic Info <i className="far fa-hand-point-left" />
+          </Ui.Button>
+          <Ui.Button
+            button__Type="dark__button"
+            handleOnClick={this.changeActiveTab.bind(this, 'Directions')}
+          >
+            Directions <i className="far fa-hand-point-right" />
+          </Ui.Button>
+        </div>
+      </div>
+    );
   }
 }

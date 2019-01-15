@@ -27,18 +27,10 @@
       font-weight: 600;
     }
   }
-}
-
-.recipe__information {
-  height: 85%;
-  width: 100%;
-  padding: 2%;
-  transition: all 0.2s ease-in-out;
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 20%;
+  .recipe__information {
+    height: 85%;
     width: 100%;
+    padding: 2%;
+    transition: all 0.2s ease-in-out;
   }
 }
