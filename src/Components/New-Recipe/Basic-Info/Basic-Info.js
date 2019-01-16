@@ -12,14 +12,25 @@ export default class BasicInfo extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = { tag: '' };
+    this.state = { tag: '', validationErrorMessage: { title: false } };
     this.enterIcon = React.createRef();
   }
   setRecipeInfo(inputType, event) {
     this.props.setRecipeInfo(inputType, event.target.value);
   }
   changeActiveTab(tabName = 'Basic Info') {
-    this.props.changeActiveTab(tabName);
+    if (this.props.recipeInfo.title.trim()) {
+      this.props.changeActiveTab(tabName);
+    } else {
+      this.setState({
+        validationErrorMessage: { title: true }
+      });
+      setTimeout(() => {
+        this.setState({
+          validationErrorMessage: { title: false }
+        });
+      }, 100);
+    }
   }
   handleKeyPress = event => {
     if (event.key === 'Enter') {
@@ -77,7 +88,7 @@ export default class BasicInfo extends Component {
             handleOnChange={this.setRecipeInfo.bind(this, 'title')}
             value={this.props.recipeInfo.title}
             setFocus={true}
-            validationErrorMessage={false}
+            validationErrorMessage={this.state.validationErrorMessage.title}
           />
           <Ui.Input
             placeholder="Writer?"

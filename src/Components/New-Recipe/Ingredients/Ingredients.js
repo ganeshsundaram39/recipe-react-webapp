@@ -14,10 +14,27 @@ export default class Ingredients extends Component {
     super(props);
     this.state = {
       ingredient: { name: '', image: DefaultBackground, size: '70% 70%' },
-      validationErrorMessage: { name: false, image: false }
+      validationErrorMessage: { name: false, image: false, addToList: false }
     };
   }
   changeActiveTab(tabName = 'Basic Info') {
+    if (tabName === 'Directions') {
+      if (this.props.ingredients.length <= 0) {
+        this.setState({
+          validationErrorMessage: { name: false, image: false, addToList: true }
+        });
+        setTimeout(() => {
+          this.setState({
+            validationErrorMessage: {
+              name: false,
+              image: false,
+              addToList: false
+            }
+          });
+        }, 100);
+        return;
+      }
+    }
     this.props.changeActiveTab(tabName);
   }
   setIngredientName(event) {
@@ -52,13 +69,13 @@ export default class Ingredients extends Component {
       let element = null;
       switch (true) {
         case name === '' && image === DefaultBackground:
-          element = { name: true, image: true };
+          element = { name: true, image: true, addToList: false };
           break;
         case name === '':
-          element = { name: true, image: false };
+          element = { name: true, image: false, addToList: false };
           break;
         case image === '':
-          element = { name: false, image: true };
+          element = { name: false, image: true, addToList: false };
           break;
         default:
           break;
@@ -66,7 +83,11 @@ export default class Ingredients extends Component {
       this.setState({ validationErrorMessage: element });
       setTimeout(() => {
         this.setState({
-          validationErrorMessage: { name: false, image: false }
+          validationErrorMessage: {
+            name: false,
+            image: false,
+            addToList: false
+          }
         });
       }, 100);
     }

@@ -21,7 +21,14 @@ const AddIngredients = props => {
 
   let addImageClasses = classes['btn'];
   if (props.validationErrorElements.image) {
-    addImageClasses = [classes['btn'], classes['validation']].join(' ');
+    addImageClasses = [classes['btn'], classes['image__validation']].join(' ');
+  }
+  let addIngredientToListButtonClasses = 'fas fa-hand-point-right';
+  if (props.validationErrorElements.addToList) {
+    addIngredientToListButtonClasses = [
+      'fas fa-hand-point-right',
+      classes['addToListButton__validation']
+    ].join(' ');
   }
   return (
     <div className={classes['add__ingredient']}>
@@ -54,7 +61,7 @@ const AddIngredients = props => {
       </div>
       <div className={classes['add__to--list']}>
         <span className={classes['add__bg']} onClick={props.addIngredient}>
-          <i className="fas fa-hand-point-right" />
+          <i className={addIngredientToListButtonClasses} />
         </span>
       </div>
     </div>
