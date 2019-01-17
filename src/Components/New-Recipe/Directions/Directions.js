@@ -7,7 +7,10 @@ import { Ui } from '../../Ui-Components/Ui-Components';
 var uniqid = require('uniqid');
 export default class Directions extends Component {
   static propTypes = { setDirections: PropTypes.func.isRequired };
-  state = { directions: [' '] };
+  state = {
+    directions: [' '],
+    validationErrorElements: { saveDirections: false }
+  };
   componentDidMount() {
     this.scrollToBottom();
   }
@@ -39,6 +42,22 @@ export default class Directions extends Component {
     });
   }
   changeActiveTab(tabName = 'Basic Info') {
+    if (tabName === 'More Info') {
+      if (
+        this.state.directions.length === 1 &&
+        this.state.directions[0].trim() === ''
+      ) {
+        this.setState({
+          validationErrorElements: { saveDirections: true }
+        });
+        setTimeout(() => {
+          this.setState({
+            validationErrorElements: { saveDirections: false }
+          });
+        }, 100);
+        return;
+      }
+    }
     this.props.changeActiveTab(tabName);
   }
   render() {
@@ -62,6 +81,7 @@ export default class Directions extends Component {
           <Actions
             newDirection={this.newDirection}
             saveDirections={this.saveDirections}
+            validationErrorElements={this.state.validationErrorElements}
           />
         </div>
         <div className={classes['actions']}>

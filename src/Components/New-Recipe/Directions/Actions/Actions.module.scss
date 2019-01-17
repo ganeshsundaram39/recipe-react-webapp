@@ -20,6 +20,18 @@
     }
     i {
       color: $base;
+      &.save__validation {
+        animation: validateSaveDirection 0.2s ease-in-out;
+      }
     }
+  }
+}
+
+@keyframes validateSaveDirection {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
   }
 }
