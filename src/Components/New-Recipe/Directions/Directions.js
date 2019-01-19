@@ -6,12 +6,21 @@ import Actions from './Actions/Actions';
 import { Ui } from '../../Ui-Components/Ui-Components';
 var uniqid = require('uniqid');
 export default class Directions extends Component {
-  static propTypes = { setDirections: PropTypes.func.isRequired };
+  static propTypes = {
+    setDirections: PropTypes.func.isRequired,
+    directions: PropTypes.array.isRequired,
+    changeActiveTab: PropTypes.func.isRequired
+  };
   state = {
     directions: [' '],
     validationErrorElements: { saveDirections: false }
   };
   componentDidMount() {
+    if (this.props.directions.length > 0) {
+      this.setState({
+        directions: this.props.directions
+      });
+    }
     this.scrollToBottom();
   }
 
@@ -30,7 +39,9 @@ export default class Directions extends Component {
   };
   saveDirections = () => {
     if (this.state.directions.length) {
-      this.props.setDirections(this.state.directions);
+      if (this.state.directions[this.state.directions.length - 1].trim()) {
+        this.props.setDirections(this.state.directions);
+      }
     }
   };
   editDirection(index, event) {
@@ -48,11 +59,15 @@ export default class Directions extends Component {
         this.state.directions[0].trim() === ''
       ) {
         this.setState({
-          validationErrorElements: { saveDirections: true }
+          validationErrorElements: {
+            saveDirections: true
+          }
         });
         setTimeout(() => {
           this.setState({
-            validationErrorElements: { saveDirections: false }
+            validationErrorElements: {
+              saveDirections: false
+            }
           });
         }, 100);
         return;

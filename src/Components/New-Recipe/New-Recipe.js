@@ -23,11 +23,17 @@ export class NewRecipe extends Component {
         imageUrl: '',
         tags: [],
         ingredients: [],
-        directions: []
+        directions: [],
+        video: null
       },
       currentTab: 'Basic Info'
     };
   }
+  saveVideo = video => {
+    this.setState(prevState => ({
+      recipeInfo: { ...prevState.recipeInfo, video: video }
+    }));
+  };
   changeActiveWindow(windowName = 'Intro') {
     this.props.navigateTo(windowName);
   }
@@ -126,12 +132,16 @@ export class NewRecipe extends Component {
           <Directions
             setDirections={this.setDirections}
             changeActiveTab={this.changeActiveTab.bind(this)}
+            directions={[...this.state.recipeInfo.directions]}
           />
         );
         break;
       case 'More Info':
         currentTabJsx = (
-          <MoreInfo changeActiveTab={this.changeActiveTab.bind(this)} />
+          <MoreInfo
+            changeActiveTab={this.changeActiveTab.bind(this)}
+            saveVideo={this.saveVideo}
+          />
         );
         break;
       default:

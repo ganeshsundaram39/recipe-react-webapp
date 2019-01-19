@@ -5,19 +5,22 @@ import '../../../../node_modules/video-react/dist/video-react.css';
 import { Player } from 'video-react';
 import DefaultVideo from '../../../assets/videos/defaultvideo.mp4';
 import { Ui } from '../../Ui-Components/Ui-Components';
+
 export default class MoreInfo extends Component {
   // static propTypes = {};
-  state = { video: { src: DefaultVideo } };
+  state = { video: { data: DefaultVideo } };
 
   readURL(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = e => {
+        const video = e.target.result;
         this.setState({
           video: {
-            src: e.target.result
+            data: video
           }
         });
+        this.props.saveVideo(video);
       };
       reader.readAsDataURL(event.target.files[0]);
     }
@@ -33,7 +36,7 @@ export default class MoreInfo extends Component {
   }
   render() {
     let removeSelectedButton =
-      this.state.video.src !== DefaultVideo ? (
+      this.state.video.data !== DefaultVideo ? (
         <button className={classes['btn']} onClick={this.removeSelectedVideo}>
           <i className="fas fa-minus" />
         </button>
@@ -61,7 +64,7 @@ export default class MoreInfo extends Component {
         <Player
           playsInline
           autoPlay={true}
-          src={this.state.video.src}
+          src={this.state.video.data}
           fluid={false}
           width={'100%'}
           height={'60%'}
