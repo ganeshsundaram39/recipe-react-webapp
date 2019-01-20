@@ -8,19 +8,30 @@ import { Ui } from '../../Ui-Components/Ui-Components';
 
 export default class MoreInfo extends Component {
   // static propTypes = {};
-  state = { video: { data: DefaultVideo } };
-
+  state = { video: { data: DefaultVideo, size: { size: 6.9, unit: 'MB' } } };
+  getFileSize(size) {
+    const unit = ['Bytes', 'KB', 'MB', 'GB'];
+    let i = 0;
+    while (size > 900) {
+      size /= 1024;
+      i++;
+    }
+    return { size: Math.round(size * 100) / 100, unit: unit[i] };
+  }
   readURL(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
+      var size = this.getFileSize(event.target.files[0].size);
       reader.onload = e => {
-        const video = e.target.result;
-        this.setState({
-          video: {
-            data: video
-          }
-        });
-        this.props.saveVideo(video);
+        if (Math.floor(size.size) < 20 && size.unit === 'MB') {
+          const video = e.target.result;
+          this.setState({
+            video: {
+              data: video
+            }
+          });
+          this.props.saveVideo(video);
+        }
       };
       reader.readAsDataURL(event.target.files[0]);
     }
