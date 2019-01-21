@@ -1,9 +1,11 @@
+import { withAlert } from 'react-alert';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './Basic-Info.module.scss';
 import { Ui } from '../../Ui-Components/Ui-Components';
 var uniqid = require('uniqid');
-export default class BasicInfo extends Component {
+
+class BasicInfo extends Component {
   static propTypes = {
     setRecipeInfo: PropTypes.func.isRequired,
     recipeInfo: PropTypes.object.isRequired,
@@ -25,6 +27,7 @@ export default class BasicInfo extends Component {
       this.setState({
         validationErrorMessage: { title: true }
       });
+      this.props.alert.info('You gotta give some Title!');
       setTimeout(() => {
         this.setState({
           validationErrorMessage: { title: false }
@@ -130,3 +133,5 @@ export default class BasicInfo extends Component {
     );
   }
 }
+
+export default withAlert(BasicInfo);
