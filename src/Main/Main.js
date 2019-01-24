@@ -17,7 +17,7 @@ export class Main extends React.Component {
       case 'Intro':
         display = (
           <Intro
-            showTime={100} // 7000
+            showTime={7000} // 7000
             activeWindow={this.state.activeWindow}
             navigateTo={this.changeActiveWindow}
           />

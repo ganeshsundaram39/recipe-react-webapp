@@ -9,7 +9,10 @@ const ListOfIngredients = props => {
         className={classes['ingredient__image']}
         style={{ backgroundImage: `url(${ingredient.image})` }}
       />
-      <div className={classes['ingredient__name']}>{ingredient.name}</div>
+      <div className={classes['ingredient__name']}>
+        {ingredient.name}{' '}
+        <i className="fas fa-times" title="Remove this ingredient." onClick={props.removeIngredient.bind(this,ingredient.name)} />
+      </div>
     </div>
   ));
   return (
@@ -19,6 +22,6 @@ const ListOfIngredients = props => {
   );
 };
 
-ListOfIngredients.propTypes = { ingredients: PropTypes.array.isRequired };
+ListOfIngredients.propTypes = { ingredients: PropTypes.array.isRequired,removeIngredient: PropTypes.func.isRequired };
 
 export default ListOfIngredients;

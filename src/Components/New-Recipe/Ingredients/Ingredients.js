@@ -5,10 +5,12 @@ import DefaultBackground from '../../../assets/images/imageupload.svg';
 import AddIngredients from './Add-Ingredients/Add-Ingredients';
 import ListOfIngredients from './List-Of-Ingredients/List-Of-Ingredients';
 import { Ui } from '../../Ui-Components/Ui-Components';
-export default class Ingredients extends Component {
+import { withAlert } from 'react-alert';
+class Ingredients extends Component {
   static propTypes = {
     addIngredient: PropTypes.func.isRequired,
-    ingredients: PropTypes.array.isRequired
+    ingredients: PropTypes.array.isRequired,
+    removeIngredient:PropTypes.func.isRequired
   };
   constructor(props) {
     super(props);
@@ -23,6 +25,8 @@ export default class Ingredients extends Component {
         this.setState({
           validationErrorMessage: { name: false, image: false, addToList: true }
         });
+
+        this.props.alert.info('No Ingredients for Recipe?');
         setTimeout(() => {
           this.setState({
             validationErrorMessage: {
@@ -80,6 +84,8 @@ export default class Ingredients extends Component {
         default:
           break;
       }
+
+      this.props.alert.info('Image and Name for Ingredient!');
       this.setState({ validationErrorMessage: element });
       setTimeout(() => {
         this.setState({
@@ -107,36 +113,27 @@ export default class Ingredients extends Component {
         });
       };
       reader.readAsDataURL(event.target.files[0]);
+
+      event.target.value = '';
     }
   }
-
+removeIngredient=ingredientName=>{
+  this.props.removeIngredient(ingredientName);
+}
   render() {
-    return (
-      <div className={classes.ingredients}>
-        <AddIngredients
-          ingredient={this.state.ingredient}
-          handleOnFileChange={this.readURL.bind(this)}
-          setName={this.setIngredientName.bind(this)}
-          addIngredient={this.addIngredient.bind(this)}
-          validationErrorElements={this.state.validationErrorMessage}
-          removeSelectedImage={this.removeSelectedImage}
-        />
-        <ListOfIngredients ingredients={this.props.ingredients} />
+    return <div className={classes.ingredients}>
+        <AddIngredients ingredient={this.state.ingredient} removeSelectedImage={this.removeSelectedImage} handleOnFileChange={this.readURL.bind(this)} setName={this.setIngredientName.bind(this)} addIngredient={this.addIngredient.bind(this)} validationErrorElements={this.state.validationErrorMessage} />
+        <ListOfIngredients ingredients={this.props.ingredients} removeIngredient={this.removeIngredient} />
         <div className={classes['actions']}>
-          <Ui.Button
-            button__Type="light__button"
-            handleOnClick={this.changeActiveTab.bind(this, 'Basic Info')}
-          >
+          <Ui.Button button__Type="light__button" handleOnClick={this.changeActiveTab.bind(this, 'Basic Info')}>
             Basic Info <i className="far fa-hand-point-left" />
           </Ui.Button>
-          <Ui.Button
-            button__Type="dark__button"
-            handleOnClick={this.changeActiveTab.bind(this, 'Directions')}
-          >
+          <Ui.Button button__Type="dark__button" handleOnClick={this.changeActiveTab.bind(this, 'Directions')}>
             Directions <i className="far fa-hand-point-right" />
           </Ui.Button>
         </div>
-      </div>
-    );
+      </div>;
   }
 }
+
+export default withAlert(Ingredients);

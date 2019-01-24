@@ -50,6 +50,20 @@ export class NewRecipe extends Component {
       };
     });
   };
+  removeIngredient = ingredientName => {
+    this.setState(prevState => {
+      return {
+        recipeInfo: {
+          ...prevState.recipeInfo,
+          ingredients: [
+            ...prevState.recipeInfo.ingredients.filter(
+              ingredient => ingredient.name !== ingredientName
+            )
+          ]
+        }
+      };
+    });
+  };
   setRecipeInfo = (inputType, inputValue) => {
     this.setState(prevState => {
       return {
@@ -122,6 +136,7 @@ export class NewRecipe extends Component {
         currentTabJsx = (
           <Ingredients
             addIngredient={this.addIngredient}
+            removeIngredient={this.removeIngredient}
             ingredients={[...this.state.recipeInfo.ingredients]}
             changeActiveTab={this.changeActiveTab.bind(this)}
           />
