@@ -12,10 +12,18 @@ function Actions(props) {
   return (
     <>
       <div className={classes['actions']}>
-        <button className={classes['new']} onClick={props.newDirection}>
+        <button
+          className={classes['new']}
+          title="Next Direction!"
+          onClick={props.newDirection}
+        >
           <i className="fas fa-plus" />
         </button>
-        <button className={classes['save']} onClick={props.saveDirections}>
+        <button
+          title="Save Direction!"
+          className={classes['save']}
+          onClick={props.saveDirections}
+        >
           <i className={saveDirectionsClasses} />
         </button>
       </div>

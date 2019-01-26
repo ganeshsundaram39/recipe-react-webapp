@@ -31,6 +31,7 @@ export default class Input extends Component {
         <input
           ref={this.inputElement}
           type="text"
+          title={this.props.title}
           style={this.props.style}
           className={inputClasses}
           placeholder={this.props.placeholder}

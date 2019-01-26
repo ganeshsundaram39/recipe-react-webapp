@@ -14,7 +14,11 @@ const AddIngredients = props => {
   };
   let removeSelectedButton =
     props.ingredient.image !== DefaultBackground ? (
-      <button className={classes['btn']} onClick={props.removeSelectedImage}>
+      <button
+        className={classes['btn']}
+        title="Remove selected Image!"
+        onClick={props.removeSelectedImage}
+      >
         <i className="fas fa-minus" />
       </button>
     ) : null;
@@ -36,6 +40,7 @@ const AddIngredients = props => {
         <div
           className={classes['upload__btn--wrapper']}
           style={style.ingredientImage}
+          title="Upload ingredient image!!"
         >
           {removeSelectedButton}
           <button className={addImageClasses}>
@@ -51,6 +56,7 @@ const AddIngredients = props => {
         <div className={classes['ingredient__name']}>
           <Ui.Input
             placeholder="Name & Qty?"
+            title="Name of Ingredient & Quantity required!"
             style={style['ingredient__name']}
             handleOnChange={props.setName}
             value={props.ingredient.name}
@@ -60,7 +66,11 @@ const AddIngredients = props => {
         </div>
       </div>
       <div className={classes['add__to--list']}>
-        <span className={classes['add__bg']} onClick={props.addIngredient}>
+        <span
+          className={classes['add__bg']}
+          onClick={props.addIngredient}
+          title="Add Ingredient to the list!!"
+        >
           <i className={addIngredientToListButtonClasses} />
         </span>
       </div>

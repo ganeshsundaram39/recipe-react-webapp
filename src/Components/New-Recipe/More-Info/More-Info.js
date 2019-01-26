@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classes from './More-Info.module.scss';
 import '../../../../node_modules/video-react/dist/video-react.css';
 import { Player } from 'video-react';
 import DefaultVideo from '../../../assets/videos/defaultvideo.mp4';
 import { Ui } from '../../Ui-Components/Ui-Components';
 
-export default class MoreInfo extends Component {
-  // static propTypes = {};
+import { withAlert } from 'react-alert';
+class MoreInfo extends Component {
+  static propTypes = {
+    video: PropTypes.string.isRequired,
+    saveVideo: PropTypes.func.isRequired,
+    changeActiveTab: PropTypes.func.isRequired,
+    recipeInfo: PropTypes.object.isRequired
+  };
   state = { video: { data: DefaultVideo, size: { size: 6.9, unit: 'MB' } } };
   getFileSize(size) {
     const unit = ['Bytes', 'KB', 'MB', 'GB'];
@@ -27,28 +33,72 @@ export default class MoreInfo extends Component {
           const video = e.target.result;
           this.setState({
             video: {
-              data: video
+              data: video,
+              size: size.size,
+              unit: size.unit
             }
           });
           this.props.saveVideo(video);
+          this.props.alert.info('Recipe Video Uploaded!');
+        } else {
+          this.props.alert.info('Please Upload Video less than 20 MB!!');
         }
       };
       reader.readAsDataURL(event.target.files[0]);
+      event.target.value = '';
     }
   }
   removeSelectedVideo = () => {
     this.setState({
-      video: { src: DefaultVideo }
+      video: { data: DefaultVideo, size: { size: 6.9, unit: 'MB' } }
     });
+    this.props.saveVideo(null);
+    this.props.alert.info('Recipe Video Removed!');
   };
-  saveRecipe() {}
+  saveRecipe() {
+    {
+      const prevRecipeWebappData = JSON.parse(
+        localStorage.getItem('recipe-webapp-data')
+      );
+      if (prevRecipeWebappData) {
+        const recipeWebappData = {
+          ...prevRecipeWebappData,
+          recipeInfo: [
+            ...prevRecipeWebappData.recipeInfo,
+            this.props.recipeInfo
+          ]
+        };
+        localStorage.setItem(
+          'recipe-webapp-data',
+          JSON.stringify(recipeWebappData)
+        );
+        return;
+      }
+    }
+    const recipeWebappData = {
+      recipeInfo: [this.props.recipeInfo]
+    };
+    localStorage.setItem(
+      'recipe-webapp-data',
+      JSON.stringify(recipeWebappData)
+    );
+  }
   changeActiveTab(tabName = 'Basic Info') {
     this.props.changeActiveTab(tabName);
+  }
+  componentDidMount() {
+    if (this.props.video !== null) {
+      this.setState({ video: this.props.video });
+    }
   }
   render() {
     let removeSelectedButton =
       this.state.video.data !== DefaultVideo ? (
-        <button className={classes['btn']} onClick={this.removeSelectedVideo}>
+        <button
+          title="Remove uploaded video"
+          className={classes['btn']}
+          onClick={this.removeSelectedVideo}
+        >
           <i className="fas fa-minus" />
         </button>
       ) : null;
@@ -98,3 +148,4 @@ export default class MoreInfo extends Component {
     );
   }
 }
+export default withAlert(MoreInfo);

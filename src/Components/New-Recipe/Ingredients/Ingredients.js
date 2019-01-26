@@ -10,7 +10,7 @@ class Ingredients extends Component {
   static propTypes = {
     addIngredient: PropTypes.func.isRequired,
     ingredients: PropTypes.array.isRequired,
-    removeIngredient:PropTypes.func.isRequired
+    removeIngredient: PropTypes.func.isRequired
   };
   constructor(props) {
     super(props);
@@ -78,7 +78,7 @@ class Ingredients extends Component {
         case name === '':
           element = { name: true, image: false, addToList: false };
           break;
-        case image === '':
+        case image === DefaultBackground:
           element = { name: false, image: true, addToList: false };
           break;
         default:
@@ -117,22 +117,40 @@ class Ingredients extends Component {
       event.target.value = '';
     }
   }
-removeIngredient=ingredientName=>{
-  this.props.removeIngredient(ingredientName);
-}
+  removeIngredient = ingredientName => {
+    this.props.removeIngredient(ingredientName);
+  };
   render() {
-    return <div className={classes.ingredients}>
-        <AddIngredients ingredient={this.state.ingredient} removeSelectedImage={this.removeSelectedImage} handleOnFileChange={this.readURL.bind(this)} setName={this.setIngredientName.bind(this)} addIngredient={this.addIngredient.bind(this)} validationErrorElements={this.state.validationErrorMessage} />
-        <ListOfIngredients ingredients={this.props.ingredients} removeIngredient={this.removeIngredient} />
+    return (
+      <div className={classes.ingredients}>
+        <AddIngredients
+          ingredient={this.state.ingredient}
+          removeSelectedImage={this.removeSelectedImage}
+          handleOnFileChange={this.readURL.bind(this)}
+          setName={this.setIngredientName.bind(this)}
+          addIngredient={this.addIngredient.bind(this)}
+          validationErrorElements={this.state.validationErrorMessage}
+        />
+        <ListOfIngredients
+          ingredients={this.props.ingredients}
+          removeIngredient={this.removeIngredient}
+        />
         <div className={classes['actions']}>
-          <Ui.Button button__Type="light__button" handleOnClick={this.changeActiveTab.bind(this, 'Basic Info')}>
+          <Ui.Button
+            button__Type="light__button"
+            handleOnClick={this.changeActiveTab.bind(this, 'Basic Info')}
+          >
             Basic Info <i className="far fa-hand-point-left" />
           </Ui.Button>
-          <Ui.Button button__Type="dark__button" handleOnClick={this.changeActiveTab.bind(this, 'Directions')}>
+          <Ui.Button
+            button__Type="dark__button"
+            handleOnClick={this.changeActiveTab.bind(this, 'Directions')}
+          >
             Directions <i className="far fa-hand-point-right" />
           </Ui.Button>
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 

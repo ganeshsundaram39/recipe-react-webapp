@@ -156,6 +156,8 @@ export class NewRecipe extends Component {
           <MoreInfo
             changeActiveTab={this.changeActiveTab.bind(this)}
             saveVideo={this.saveVideo}
+            video={this.state.recipeInfo.video}
+            recipeInfo={this.state.recipeInfo}
           />
         );
         break;

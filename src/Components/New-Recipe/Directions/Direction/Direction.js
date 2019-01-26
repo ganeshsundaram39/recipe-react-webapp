@@ -9,10 +9,15 @@ const Direction = props => {
     <div className={classes['single__process']}>
       <div className={classes['count']}>{props.index}. </div>
       <Ui.Input
-        placeholder="Take 2 cup of ..."
+        placeholder="Ex. Take 2 cup of ..."
+        title="Direction for recipe"
         style={{ width: '90%' }}
         handleOnChange={props.editDirection}
-        value={props.directionName.trim()}
+        value={
+          props.directionName.trim() !== ''
+            ? props.directionName.trimStart()
+            : ''
+        }
         setFocus={true}
         validationErrorMessage={false}
       />

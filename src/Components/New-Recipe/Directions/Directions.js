@@ -4,8 +4,10 @@ import classes from './Directions.module.scss';
 import Direction from './Direction/Direction';
 import Actions from './Actions/Actions';
 import { Ui } from '../../Ui-Components/Ui-Components';
+import { withAlert } from 'react-alert';
 var uniqid = require('uniqid');
-export default class Directions extends Component {
+
+class Directions extends Component {
   static propTypes = {
     setDirections: PropTypes.func.isRequired,
     directions: PropTypes.array.isRequired,
@@ -41,6 +43,7 @@ export default class Directions extends Component {
     if (this.state.directions.length) {
       if (this.state.directions[this.state.directions.length - 1].trim()) {
         this.props.setDirections(this.state.directions);
+        this.props.alert.info('Directions Saved!');
       }
     }
   };
@@ -63,6 +66,8 @@ export default class Directions extends Component {
             saveDirections: true
           }
         });
+
+        this.props.alert.info('No Directions for Recipe?');
         setTimeout(() => {
           this.setState({
             validationErrorElements: {
@@ -117,3 +122,4 @@ export default class Directions extends Component {
     );
   }
 }
+export default withAlert(Directions);

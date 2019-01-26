@@ -87,6 +87,7 @@ class BasicInfo extends Component {
         <div className={classes['input__wrapper']}>
           <Ui.Input
             placeholder="Title?"
+            title="Title for new Recipe!"
             style={style.titleStyle}
             handleOnChange={this.setRecipeInfo.bind(this, 'title')}
             value={this.props.recipeInfo.title}
@@ -95,6 +96,7 @@ class BasicInfo extends Component {
           />
           <Ui.Input
             placeholder="Writer?"
+            title="Who invented this recipe!"
             style={style.writerStyle}
             handleOnChange={this.setRecipeInfo.bind(this, 'writer')}
             value={this.props.recipeInfo.writer}
@@ -103,6 +105,7 @@ class BasicInfo extends Component {
           />
           <Ui.Input
             placeholder="Tags?"
+            title="Tags for this recipe!"
             style={style.tagsStyle}
             onKeyPress={this.handleKeyPress}
             handleOnChange={this.setTagForRecipe}
