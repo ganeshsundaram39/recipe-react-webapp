@@ -5,7 +5,6 @@ import { Ui } from '../Ui-Components/Ui-Components';
 import BasicInfo from './Basic-Info/Basic-Info';
 import Ingredients from './Ingredients/Ingredients';
 import Directions from './Directions/Directions';
-import MoreInfo from './More-Info/More-Info';
 
 export class NewRecipe extends Component {
   static propTypes = {
@@ -20,21 +19,28 @@ export class NewRecipe extends Component {
       recipeInfo: {
         title: '',
         writer: '',
-        imageUrl: '',
         tags: [],
         ingredients: [],
-        directions: [],
-        video: null
+        directions: []
       },
       currentTab: 'Basic Info'
     };
   }
-  saveVideo = video => {
-    this.setState(prevState => ({
-      recipeInfo: { ...prevState.recipeInfo, video: video }
-    }));
+
+  clearRecipeInfo = () => {
+    this.setState({
+      recipeInfo: {
+        title: '',
+        writer: '',
+        tags: [],
+        ingredients: [],
+        directions: []
+      },
+      currentTab: 'Basic Info'
+    });
   };
-  changeActiveWindow(windowName = 'Intro') {
+
+  changeActiveWindow(windowName = 'Main') {
     this.props.navigateTo(windowName);
   }
   changeActiveTab(tabName = 'Basic Info') {
@@ -148,16 +154,9 @@ export class NewRecipe extends Component {
             setDirections={this.setDirections}
             changeActiveTab={this.changeActiveTab.bind(this)}
             directions={[...this.state.recipeInfo.directions]}
-          />
-        );
-        break;
-      case 'More Info':
-        currentTabJsx = (
-          <MoreInfo
-            changeActiveTab={this.changeActiveTab.bind(this)}
-            saveVideo={this.saveVideo}
-            video={this.state.recipeInfo.video}
             recipeInfo={this.state.recipeInfo}
+            changeActiveWindow={this.changeActiveWindow.bind(this)}
+            clearRecipeInfo={this.clearRecipeInfo}
           />
         );
         break;
@@ -178,7 +177,7 @@ export class NewRecipe extends Component {
             <div className={classes['page__name']}>New Recipe</div>
             <Ui.Button
               button__Type="dark__button"
-              handleOnClick={this.changeActiveWindow.bind(this, 'Main')}
+              handleOnClick={this.changeActiveWindow.bind(this)}
             >
               Main <i className="far fa-compass" />
             </Ui.Button>

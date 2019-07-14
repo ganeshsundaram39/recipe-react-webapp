@@ -5,13 +5,13 @@ var uniqid = require('uniqid');
 const ListOfIngredients = props => {
   const ingredients = props.ingredients.map(ingredient => (
     <div className={classes['ingredient']} key={uniqid()}>
-      <div
-        className={classes['ingredient__image']}
-        style={{ backgroundImage: `url(${ingredient.image})` }}
-      />
       <div className={classes['ingredient__name']}>
         {ingredient.name}{' '}
-        <i className="fas fa-times" title="Remove this ingredient." onClick={props.removeIngredient.bind(this,ingredient.name)} />
+        <i
+          className="fas fa-times"
+          title="Remove this ingredient."
+          onClick={props.removeIngredient.bind(this, ingredient.name)}
+        />
       </div>
     </div>
   ));
@@ -22,6 +22,9 @@ const ListOfIngredients = props => {
   );
 };
 
-ListOfIngredients.propTypes = { ingredients: PropTypes.array.isRequired,removeIngredient: PropTypes.func.isRequired };
+ListOfIngredients.propTypes = {
+  ingredients: PropTypes.array.isRequired,
+  removeIngredient: PropTypes.func.isRequired
+};
 
 export default ListOfIngredients;

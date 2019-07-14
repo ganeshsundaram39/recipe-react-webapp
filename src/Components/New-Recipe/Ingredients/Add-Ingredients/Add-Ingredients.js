@@ -3,30 +3,11 @@ import PropTypes from 'prop-types';
 import classes from './Add-Ingredients.module.scss';
 import { Ui } from '../../../Ui-Components/Ui-Components';
 
-import DefaultBackground from '../../../../assets/images/imageupload.svg';
 const AddIngredients = props => {
   const style = {
-    ingredient__name: { width: '100%', fontSize: '1rem' },
-    ingredientImage: {
-      backgroundImage: `url(${props.ingredient.image})`,
-      backgroundSize: props.ingredient.size
-    }
+    ingredient__name: { width: '100%', fontSize: '1rem' }
   };
-  let removeSelectedButton =
-    props.ingredient.image !== DefaultBackground ? (
-      <button
-        className={classes['btn']}
-        title="Remove selected Image!"
-        onClick={props.removeSelectedImage}
-      >
-        <i className="fas fa-minus" />
-      </button>
-    ) : null;
 
-  let addImageClasses = classes['btn'];
-  if (props.validationErrorElements.image) {
-    addImageClasses = [classes['btn'], classes['image__validation']].join(' ');
-  }
   let addIngredientToListButtonClasses = 'fas fa-hand-point-right';
   if (props.validationErrorElements.addToList) {
     addIngredientToListButtonClasses = [
@@ -37,30 +18,14 @@ const AddIngredients = props => {
   return (
     <div className={classes['add__ingredient']}>
       <div className={classes['add__ingredient--input']}>
-        <div
-          className={classes['upload__btn--wrapper']}
-          style={style.ingredientImage}
-          title="Upload ingredient image!!"
-        >
-          {removeSelectedButton}
-          <button className={addImageClasses}>
-            <i className="fas fa-plus" />
-          </button>
-          <input
-            type="file"
-            name="myfile"
-            accept="image/*"
-            onChange={props.handleOnFileChange}
-          />
-        </div>
         <div className={classes['ingredient__name']}>
           <Ui.Input
             placeholder="Name & Qty?"
-            title="Name of Ingredient & Quantity required!"
             style={style['ingredient__name']}
             handleOnChange={props.setName}
             value={props.ingredient.name}
             setFocus={true}
+            onKeyPress={props.handleKeyPress}
             validationErrorMessage={props.validationErrorElements.name}
           />
         </div>
@@ -81,10 +46,9 @@ const AddIngredients = props => {
 AddIngredients.propTypes = {
   ingredient: PropTypes.object.isRequired,
   setName: PropTypes.func.isRequired,
-  handleOnFileChange: PropTypes.func.isRequired,
+  handleKeyPress: PropTypes.func.isRequired,
   addIngredient: PropTypes.func.isRequired,
-  validationErrorElements: PropTypes.object.isRequired,
-  removeSelectedImage: PropTypes.func.isRequired
+  validationErrorElements: PropTypes.object.isRequired
 };
 
 export default AddIngredients;

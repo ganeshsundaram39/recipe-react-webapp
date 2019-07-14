@@ -14,7 +14,7 @@
     width: 25%;
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     .add__bg {
       background: $white;
@@ -45,9 +45,7 @@
   justify-content: flex-end;
   align-items: flex-start;
   padding: 3%;
-  // background-image: url('../../../assets/images/imageupload.svg');
   background-position: center center;
-  // background-size: 70% 70%;
   background-repeat: no-repeat;
   background-color: rgba($black, 0.3);
   .btn {
@@ -57,34 +55,14 @@
     background: #fff;
     box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.25);
     margin-left: 3%;
-    &.image__validation {
-      animation: validationImageSignal 0.2s ease-in-out;
-    }
-
     i {
       color: $base;
       font-size: 1.2rem;
       cursor: pointer;
     }
   }
-  input[type='file'] {
-    font-size: 100px;
-    position: absolute;
-    right: 4%;
-    top: 4%;
-    opacity: 0;
-    width: 15%;
-    height: 20%;
-  }
 }
-@keyframes validationImageSignal {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
+
 @keyframes validateAddToListSignal {
   0% {
     transform: translateX(0);

@@ -55,11 +55,12 @@ class Directions extends Component {
       return { directions: directions };
     });
   }
-  changeActiveTab(tabName = 'Basic Info') {
-    if (tabName === 'More Info') {
+  changeActiveTab(tabName) {
+    if (tabName === 'save') {
       if (
-        this.state.directions.length === 1 &&
-        this.state.directions[0].trim() === ''
+        (this.state.directions.length === 1 &&
+          this.state.directions[0].trim() === '') ||
+        this.props.directions.length === 0
       ) {
         this.setState({
           validationErrorElements: {
@@ -76,9 +77,46 @@ class Directions extends Component {
           });
         }, 100);
         return;
+      } else {
+        this.saveRecipe();
+      }
+    } else {
+      this.props.changeActiveTab(tabName);
+    }
+  }
+  saveRecipe() {
+    {
+      const prevRecipeWebappData = JSON.parse(
+        localStorage.getItem('recipe-webapp-data')
+      );
+      if (prevRecipeWebappData) {
+        const recipeWebappData = {
+          ...prevRecipeWebappData,
+          recipeInfo: [
+            ...prevRecipeWebappData.recipeInfo,
+            this.props.recipeInfo
+          ]
+        };
+        localStorage.setItem(
+          'recipe-webapp-data',
+          JSON.stringify(recipeWebappData)
+        );
+        this.props.alert.info('Recipe Saved!');
+        this.props.clearRecipeInfo();
+        this.props.changeActiveWindow();
+        return;
       }
     }
-    this.props.changeActiveTab(tabName);
+    const recipeWebappData = {
+      recipeInfo: [this.props.recipeInfo]
+    };
+    localStorage.setItem(
+      'recipe-webapp-data',
+      JSON.stringify(recipeWebappData)
+    );
+    this.props.alert.info('Recipe Saved!');
+    this.props.clearRecipeInfo();
+    this.props.changeActiveWindow();
   }
   render() {
     const directions = this.state.directions.map((direction, index) => (
@@ -113,9 +151,9 @@ class Directions extends Component {
           </Ui.Button>
           <Ui.Button
             button__Type="dark__button"
-            handleOnClick={this.changeActiveTab.bind(this, 'More Info')}
+            handleOnClick={this.changeActiveTab.bind(this, 'save')}
           >
-            More Info <i className="far fa-hand-point-right" />
+            Save <i className="far fa-save" />
           </Ui.Button>
         </div>
       </div>
