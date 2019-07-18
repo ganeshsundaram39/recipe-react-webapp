@@ -55,7 +55,7 @@ class Directions extends Component {
       return { directions: directions };
     });
   }
-  changeActiveTab(tabName) {
+  changeActiveTab(tabName, e) {
     if (tabName === 'save') {
       if (
         (this.state.directions.length === 1 &&
@@ -78,23 +78,22 @@ class Directions extends Component {
         }, 100);
         return;
       } else {
-        this.saveRecipe();
+        this.saveRecipe(e);
       }
     } else {
       this.props.changeActiveTab(tabName);
     }
   }
-  saveRecipe() {
+  saveRecipe(e) {
     {
       const prevRecipeWebappData = JSON.parse(
         localStorage.getItem('recipe-webapp-data')
       );
       if (prevRecipeWebappData) {
         const recipeWebappData = {
-          ...prevRecipeWebappData,
           recipeInfo: [
             ...prevRecipeWebappData.recipeInfo,
-            this.props.recipeInfo
+            { ...this.props.recipeInfo, id: uniqid() }
           ]
         };
         localStorage.setItem(
@@ -103,12 +102,12 @@ class Directions extends Component {
         );
         this.props.alert.info('Recipe Saved!');
         this.props.clearRecipeInfo();
-        this.props.changeActiveWindow();
+        this.props.changeActiveWindow(e);
         return;
       }
     }
     const recipeWebappData = {
-      recipeInfo: [this.props.recipeInfo]
+      recipeInfo: [{ ...this.props.recipeInfo, id: uniqid() }]
     };
     localStorage.setItem(
       'recipe-webapp-data',
@@ -116,7 +115,7 @@ class Directions extends Component {
     );
     this.props.alert.info('Recipe Saved!');
     this.props.clearRecipeInfo();
-    this.props.changeActiveWindow();
+    this.props.changeActiveWindow(e);
   }
   render() {
     const directions = this.state.directions.map((direction, index) => (

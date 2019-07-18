@@ -7,7 +7,7 @@ export const BackgroundImage = props => {
       <img
         className={classes.background}
         style={props.cssStyles}
-        src={require('../../../assets/images/' + props.url)}
+        src={props.url}
         alt={props.name}
       />
     </>

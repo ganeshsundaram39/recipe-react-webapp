@@ -2,10 +2,12 @@ import React from 'react';
 
 import { Intro } from '../Components/Intro/Intro';
 import { NewRecipe } from '../Components/New-Recipe/New-Recipe';
+import AllRecipes from '../Components/All-Recipes/All-Recipes';
+
 export class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeWindow: 'Intro' };
+    this.state = { activeWindow: 'All-Recipes' };
     this.changeActiveWindow = this.changeActiveWindow.bind(this);
   }
   changeActiveWindow(name = 'Intro') {
@@ -35,6 +37,11 @@ export class Main extends React.Component {
       case 'New-Recipe':
         display = (
           <NewRecipe showTime={50} navigateTo={this.changeActiveWindow} />
+        );
+        break;
+      case 'All-Recipes':
+        display = (
+          <AllRecipes showTime={50} navigateTo={this.changeActiveWindow} />
         );
         break;
       default:

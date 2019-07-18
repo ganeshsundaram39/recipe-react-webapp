@@ -13,7 +13,8 @@ export class Intro extends React.Component {
       showWrapper: false,
       backgroundImage: {
         name: 'vegetables',
-        url: 'vegetables.jpg',
+        url:
+          'https://res.cloudinary.com/gscode/image/upload/q_auto:low/v1563437898/vegetables.jpg',
         cssStyles: {}
       }
     };

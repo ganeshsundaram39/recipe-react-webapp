@@ -1,6 +1,6 @@
 @import '../../assets/scss/variables.scss';
 
-.new__recipe {
+.all_recipes {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,10 +24,12 @@
       font-weight: 600;
     }
   }
-  .recipe__information {
+  .all-recipes__wrapper {
     height: 85%;
     width: 100%;
     padding: 2%;
     transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-wrap: wrap;
   }
 }

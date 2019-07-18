@@ -15,7 +15,12 @@ export class NewRecipe extends Component {
     super(props);
     this.state = {
       showWrapper: false,
-      backgroundImage: { name: 'fruits', url: 'fruits.jpeg', cssStyles: {} },
+      backgroundImage: {
+        name: 'fruits',
+        url:
+          'https://res.cloudinary.com/gscode/image/upload/q_auto:low/v1563437894/fruits.jpg',
+        cssStyles: {}
+      },
       recipeInfo: {
         title: '',
         writer: '',
@@ -40,7 +45,8 @@ export class NewRecipe extends Component {
     });
   };
 
-  changeActiveWindow(windowName = 'Main') {
+  changeActiveWindow(e, windowName = 'Main') {
+    e.preventDefault();
     this.props.navigateTo(windowName);
   }
   changeActiveTab(tabName = 'Basic Info') {
