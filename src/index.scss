@@ -29,3 +29,14 @@ body {
   background: $base;
   color: $black;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6003c;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}

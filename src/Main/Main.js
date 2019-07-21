@@ -7,7 +7,7 @@ import AllRecipes from '../Components/All-Recipes/All-Recipes';
 export class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeWindow: 'All-Recipes' };
+    this.state = { activeWindow: 'Intro' };
     this.changeActiveWindow = this.changeActiveWindow.bind(this);
   }
   changeActiveWindow(name = 'Intro') {

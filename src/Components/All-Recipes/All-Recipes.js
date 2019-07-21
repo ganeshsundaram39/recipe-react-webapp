@@ -23,7 +23,8 @@ class AllRecipes extends Component {
           'https://res.cloudinary.com/gscode/image/upload/q_auto:low/v1563437893/cabbage.jpg',
         cssStyles: {}
       },
-      recipeInfo: []
+      recipeInfo: [],
+      activeRecipeId: null
     };
   }
   changeActiveWindow(e, windowName = 'Main') {
@@ -33,10 +34,12 @@ class AllRecipes extends Component {
   showWrapper() {
     this.setState({ showWrapper: true });
   }
-  deleteRecipe = id => {
+  deleteRecipe = (id, e) => {
+    e.preventDefault();
     const { recipeInfo } = this.state;
     const updatedRecipe = {
-      recipeInfo: recipeInfo.filter(recipe => recipe.id !== id)
+      recipeInfo: recipeInfo.filter(recipe => recipe.id !== id),
+      activeRecipeId: recipeInfo.length > 1 ? recipeInfo[0].id : null
     };
     this.setState(updatedRecipe);
     localStorage.setItem('recipe-webapp-data', JSON.stringify(updatedRecipe));
@@ -54,7 +57,8 @@ class AllRecipes extends Component {
     ) {
       this.setState({
         showWrapper: true,
-        recipeInfo: recipeWebappData.recipeInfo
+        recipeInfo: recipeWebappData.recipeInfo,
+        activeRecipeId: recipeWebappData.recipeInfo[0].id
       });
     }
     setTimeout(() => {
@@ -63,8 +67,11 @@ class AllRecipes extends Component {
     }, this.props.showTime);
   }
   render() {
-    const { recipeInfo } = this.state;
+    const { recipeInfo, activeRecipeId } = this.state;
     const allRecipeTitles = recipeInfo.map(recipe => [recipe.id, recipe.title]);
+    const activeRecipe = recipeInfo.find(
+      recipe => recipe.id === activeRecipeId
+    );
     const wrapperStyles = {
       height: this.state.showWrapper ? '85%' : '0%',
       width: '70%',
@@ -94,8 +101,15 @@ class AllRecipes extends Component {
             <AllRecipesSidebar
               allRecipeTitles={allRecipeTitles}
               deleteRecipe={this.deleteRecipe}
+              activeRecipeId={activeRecipeId}
+              describeRecipe={(id, e) => {
+                e.preventDefault();
+                this.setState({
+                  activeRecipeId: id
+                });
+              }}
             />
-            <RecipeDescription />
+            <RecipeDescription activeRecipe={activeRecipe} />
           </div>
         </Ui.Wrapper>
       </div>

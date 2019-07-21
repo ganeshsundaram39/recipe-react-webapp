@@ -1,12 +1,13 @@
 .all-recipes__sidebar {
   flex-basis: 30%;
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   .recipe-name-wrapper {
     display: flex;
     height: 50px;
-    justify-content: center;
     &:first-of-type {
-      margin-top: 3%;
+      margin-top: 7px;
       transition: 0.1s ease;
     }
     .recipe__name {
@@ -14,7 +15,7 @@
       height: 100%;
       background: #fff;
       text-transform: uppercase;
-      padding: 2%;
+      padding: 2% 3%;
       letter-spacing: 3px;
       font-size: 0.9rem;
       display: flex;
@@ -28,9 +29,14 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
       &:hover {
         transform: skewY(-2deg);
         z-index: 2;
+      }
+      span {
+        font-size: 0.8rem;
+        text-transform: uppercase;
       }
       i {
         font-size: 0.8rem;
