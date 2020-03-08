@@ -1,8 +1,8 @@
 {
-  "name": "recipe-webapp",
+  "name": "recipe-react-webapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ganeshsundaram39.github.io/recipe-react-webapps",
+  "homepage": "https://ganeshsundaram39.github.io/recipe-react-webapp",
   "dependencies": {
     "node-sass": "^4.13.1",
     "react": "^16.6.3",
