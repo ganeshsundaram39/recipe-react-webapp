@@ -1,7 +1,7 @@
 {
   "main.css": "/recipe-react-webapp/static/css/main.a4bf9f36.chunk.css",
-  "main.js": "/recipe-react-webapp/static/js/main.a081c20b.chunk.js",
-  "main.js.map": "/recipe-react-webapp/static/js/main.a081c20b.chunk.js.map",
+  "main.js": "/recipe-react-webapp/static/js/main.9117ff0b.chunk.js",
+  "main.js.map": "/recipe-react-webapp/static/js/main.9117ff0b.chunk.js.map",
   "static/js/1.c2e70d1a.chunk.js": "/recipe-react-webapp/static/js/1.c2e70d1a.chunk.js",
   "static/js/1.c2e70d1a.chunk.js.map": "/recipe-react-webapp/static/js/1.c2e70d1a.chunk.js.map",
   "runtime~main.js": "/recipe-react-webapp/static/js/runtime~main.4ed72a11.js",
@@ -16,6 +16,6 @@
   "static/media/tasting_dodger.svg": "/recipe-react-webapp/static/media/tasting_dodger.ac395b59.svg",
   "static/css/main.a4bf9f36.chunk.css.map": "/recipe-react-webapp/static/css/main.a4bf9f36.chunk.css.map",
   "index.html": "/recipe-react-webapp/index.html",
-  "precache-manifest.adfa44a49e25ed2d4583d8cde48b99c2.js": "/recipe-react-webapp/precache-manifest.adfa44a49e25ed2d4583d8cde48b99c2.js",
+  "precache-manifest.b3d10659f575d984a6b64a69c8e04284.js": "/recipe-react-webapp/precache-manifest.b3d10659f575d984a6b64a69c8e04284.js",
   "service-worker.js": "/recipe-react-webapp/service-worker.js"
 }

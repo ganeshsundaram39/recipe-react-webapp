@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "a081c20bc3cec4f9ee01",
+    "revision": "9117ff0ba7fabc102d61",
     "url": "/recipe-react-webapp/static/css/main.a4bf9f36.chunk.css"
   },
   {
-    "revision": "a081c20bc3cec4f9ee01",
-    "url": "/recipe-react-webapp/static/js/main.a081c20b.chunk.js"
+    "revision": "9117ff0ba7fabc102d61",
+    "url": "/recipe-react-webapp/static/js/main.9117ff0b.chunk.js"
   },
   {
     "revision": "c2e70d1a1708dc002aa5",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/recipe-react-webapp/static/media/tasting_dodger.ac395b59.svg"
   },
   {
-    "revision": "46c807abbcff267913848f12a36fe885",
+    "revision": "1b11f566ca347235cac829c7dd65c80a",
     "url": "/recipe-react-webapp/index.html"
   }
 ];
